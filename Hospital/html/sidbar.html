@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Heart | SidBar</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/sidbar.css">
+</head>
+<body>
+    <!-- PAGE LOADER -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-heart"><i class="fas fa-heartbeat"></i></div>
+    </div>
+    
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sb-logo">
+            <div class="sb-logo-icon">
+                <!-- <i class="fas fa-heartbeat"></i> -->
+                <img src="../image/logo.png" alt="">
+            </div>
+            <div class="sb-logo-text">
+                <h3>Safe Heart</h3>
+                <p>Heart Care Hospital</p>
+            </div>
+        </div>
+        <!-- <div class="sb-divider"></div> -->
+        <nav class="sb-nav">
+            <a href="./Hospital_Dashboard.html" class="sb-link"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+            <a href="#" class="sb-link active"><i class="fas fa-user-injured"></i><span>Patients</span></a>
+            <a href="#" class="sb-link"><i class="fas fa-bell"></i><span>Alerts</span><em class="nav-dot">3</em></a>
+            <a href="#" class="sb-link"><i class="fas fa-file-medical-alt"></i><span>Reports</span></a>
+            <div class="sb-divider"></div>
+            <a href="#" class="sb-link"><i class="fas fa-cog"></i><span>Settings</span></a>
+            <a href="#" class="sb-link"><i class="fas fa-question-circle"></i><span>Help</span></a>
+        </nav>
+        <div class="sb-bottom">
+            <div class="sb-user">
+                <div class="sb-avatar">AD</div>
+                <div class="sb-user-info">
+                    <p>Admin</p><small>Hospital Manager</small>
+                </div>
+            </div>
+            <div class="sb-btns">
+                <button class="sb-btn lock" id="lockBtn"><i class="fas fa-lock"></i> Lock</button>
+                <button class="sb-btn logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+        <div class="lock-screen" id="lockScreen">
+            <div class="lock-icon"><i class="fas fa-lock"></i></div>
+            <h3>Screen Locked</h3>
+            <p>Enter PIN to unlock</p>
+            <input class="lock-input" type="password" id="lockPin" placeholder="Enter PIN" maxlength="4">
+            <button class="lock-unlock-btn" id="unlockBtn">Unlock</button>
+        </div>
+    </aside>
+    
+    <div class="overlay" id="overlay"></div>
+</body>
+</html>

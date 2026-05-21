@@ -1,0 +1,125 @@
+.login-section { height: 100vh; display: flex; align-items: center; justify-content: center; background: #e0f0f0; padding: 20px; font-family: 'Inter', sans-serif; }
+.login-container { display: flex; width: 100%; max-width: 900px; height: 650px; background: #fff; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-radius: 15px; }
+
+.brand-side { flex: 0.8; background: #5bb4b4; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+.logo-box { background: #fff; width: 180px; height: 180px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 15px; }
+.logo-img-div { width: 100px; height: 100px; background-image: url('logo.png'); background-size: contain; background-repeat: no-repeat; background-position: center; margin-bottom: 8px; }
+.logo-box span { color: #333; font-weight: 800; font-size: 1.1rem; }
+.brand-side h1 { color: #fff; font-size: 1.8rem; margin: 10px 0; font-weight: 700; }
+.brand-side p { color: #fff; font-size: 0.8rem; opacity: 0.9; }
+
+.form-side { flex: 1.2; background: #fff; padding: 30px 50px; display: flex; flex-direction: column; overflow-y: auto; }
+.form-side h2 { color: #5bb4b4; text-align: center; margin-bottom: 25px; font-weight: 700; font-size: 1.8rem; text-transform: capitalize; }
+
+.input-group { margin-bottom: 15px; text-align: left; }
+.input-group label { display: block; font-size: 0.75rem; color: #444; margin-bottom: 5px; font-weight: 600; text-transform: capitalize; }
+.input-wrapper { position: relative; }
+.input-wrapper input { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; outline: none; transition: 0.4s ease; font-size: 0.9rem; }
+
+.input-wrapper input:focus { border-color: #5bb4b4; transform: translateX(5px); box-shadow: 0 0 0 4px rgba(91, 180, 180, 0.1); }
+.input-wrapper i { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #5bb4b4; font-size: 0.9rem; pointer-events: none; transition: 0.3s; }
+.input-wrapper input:focus ~ i { transform: scale(1.2) translateY(-50%); }
+
+.btn-login { width: 100%; padding: 14px; background: #5bb4b4; color: #fff; border: none; border-radius: 25px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 15px; font-size: 1rem; }
+.btn-login:hover { opacity: 0.9; transform: translateY(-2px); }
+
+.form-footer { text-align: center; margin-top: 20px; font-size: 0.8rem; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
+.form-footer a { color: #5bb4b4; text-decoration: none; font-weight: 700; }
+
+/* إخفاء شريط التمرير بشكل جمالي */
+.form-side::-webkit-scrollbar { width: 5px; }
+.form-side::-webkit-scrollbar-thumb { background: #5bb4b4; border-radius: 10px; }
+
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    opacity: 0;
+    transition: 0.3s;
+    z-index: 9999;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.toast.success {
+    background: #22c55e;
+}
+
+.toast.error {
+    background: #ff4b5c;
+}
+
+
+.input-wrapper.error {
+    border: 1.5px solid #ff4b5c !important;
+    box-shadow: 0 0 0 4px rgba(255, 75, 92, 0.12);
+    animation: shake 0.25s ease;
+}
+
+.input-wrapper.success {
+    border: 1.5px solid #22c55e !important;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12);
+}
+
+/* shake animation */
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    50% {
+        transform: translateX(4px);
+    }
+
+    75% {
+        transform: translateX(-4px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+.input-wrapper:focus-within {
+    transform: scale(1.01);
+}
+
+.strength-bar {
+    width: 100%;
+    height: 5px;
+    background: #eee;
+    border-radius: 10px;
+    margin-top: 6px;
+    overflow: hidden;
+}
+
+#strengthFill {
+    height: 100%;
+    width: 0%;
+    background: red;
+    transition: 0.3s;
+}
+
+#strengthText {
+    font-size: 12px;
+    margin-top: 4px;
+    color: #888;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: 0.5s;
+}
+@media (max-width: 768px) { .login-container { flex-direction: column; height: auto; } .brand-side { padding: 40px; } }

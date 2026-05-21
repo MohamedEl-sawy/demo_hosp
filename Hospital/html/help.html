@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Heart | Help Center</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/help.css">
+</head>
+
+<body>
+
+    <!-- PAGE LOADER -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-wrap">
+            <div class="loader-heart"><i class="fas fa-heartbeat"></i></div>
+            <p>Loading Help Center…</p>
+        </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sb-logo">
+            <div class="sb-logo-icon"><i class="fas fa-heartbeat"></i></div>
+            <div class="sb-logo-text">
+                <h3>Safe Heart</h3>
+                <p>Heart Care Hospital</p>
+            </div>
+        </div>
+        <nav class="sb-nav">
+            <a href="./Hospital_Dashboard.html" class="sb-link"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+            <a href="./patient.html" class="sb-link"><i class="fas fa-user-injured"></i><span>Patients</span></a>
+            <a href="./Alert.html" class="sb-link"><i class="fas fa-bell"></i><span>Alerts</span><em class="nav-dot">3</em></a>
+            <a href="./Report.html" class="sb-link"><i class="fas fa-file-medical-alt"></i><span>Reports</span></a>
+            <div class="sb-divider"></div>
+            <a href="./Setting.html" class="sb-link"><i class="fas fa-cog"></i><span>Settings</span></a>
+            <a href="#" class="sb-link active"><i class="fas fa-question-circle"></i><span>Help</span></a>
+        </nav>
+        <div class="sb-bottom">
+            <div class="sb-user">
+                <div class="sb-avatar">AD</div>
+                <div class="sb-user-info">
+                    <p>Admin</p><small>Hospital Manager</small>
+                </div>
+            </div>
+            <div class="sb-btns">
+                <button class="sb-btn lock" id="lockBtn"><i class="fas fa-lock"></i> Lock</button>
+                <button class="sb-btn logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+        <div class="lock-screen" id="lockScreen">
+            <div class="lock-icon"><i class="fas fa-lock"></i></div>
+            <h3>Screen Locked</h3>
+            <p>Enter PIN to unlock</p>
+            <input class="lock-input" type="password" id="lockPin" placeholder="••••" maxlength="4">
+            <button class="lock-unlock-btn" id="unlockBtn">Unlock</button>
+        </div>
+    </aside>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- PAGE WRAP -->
+    <div class="page-wrap">
+
+        <!-- TOP BAR -->
+        <div class="topbar">
+            <div class="topbar-left">
+                <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+                <div>
+                    <h1 class="page-title">Help Center</h1>
+                    <p class="page-sub">Support &amp; Guidance</p>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <div class="topbar-datetime" id="topbarClock"></div>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <!-- HERO SEARCH -->
+            <div class="help-hero slide-up" style="--d:.05s">
+                <div class="hero-text">
+                    <h2>How can we help you?</h2>
+                    <p>Search articles, FAQs, and guides for Safe Heart platform</p>
+                </div>
+                <div class="search-wrap">
+                    <i class="fas fa-search search-ico"></i>
+                    <input type="text" id="searchInput" placeholder="Search help articles…" autocomplete="off">
+                    <button class="search-clear" id="searchClear" onclick="clearSearch()"><i
+                            class="fas fa-times"></i></button>
+                </div>
+                <div class="search-tags">
+                    <span class="stag" onclick="quickSearch('patient')">Search Patient</span>
+                    <span class="stag" onclick="quickSearch('report')">Generate Report</span>
+                    <span class="stag" onclick="quickSearch('alert')">Alerts</span>
+                    <span class="stag" onclick="quickSearch('password')">Password</span>
+                </div>
+            </div>
+
+            <!-- TWO COLUMN LAYOUT -->
+            <div class="help-grid">
+
+                <!-- LEFT: FAQ -->
+                <div class="help-col">
+                    <div class="section-hdr slide-up" style="--d:.1s">
+                        <div class="section-icon"><i class="fas fa-question-circle"></i></div>
+                        <div>
+                            <h2>Frequently Asked Questions</h2>
+                            <p id="faqCount">5 articles</p>
+                        </div>
+                    </div>
+                    <div class="faq-list" id="faqList">
+
+                        <div class="faq-item slide-up" style="--d:.12s"
+                            data-keywords="search patient find lookup id name">
+                            <button class="faq-btn" onclick="toggleFAQ(this)">
+                                <div class="faq-q-wrap">
+                                    <div class="faq-q-icon"><i class="fas fa-search"></i></div>
+                                    <span>How to search for a patient?</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-arrow"></i>
+                            </button>
+                            <div class="faq-body">
+                                <p>To search for a patient, navigate to the <strong>Patients</strong> section from the
+                                    sidebar. You can search by:</p>
+                                <ul>
+                                    <li><strong>Patient ID</strong> — e.g. <code>SH-00412</code></li>
+                                    <li><strong>Full Name</strong> — type part of the name</li>
+                                    <li><strong>Admission Date</strong> — filter by date range</li>
+                                </ul>
+                                <p>Results update in real-time as you type. Click a patient row to open their full
+                                    profile.</p>
+                                <div class="faq-tip"><i class="fas fa-lightbulb"></i> Tip: Use the "Advanced Filter"
+                                    button for multi-criteria search.</div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item slide-up" style="--d:.14s"
+                            data-keywords="generate report pdf export medical download print">
+                            <button class="faq-btn" onclick="toggleFAQ(this)">
+                                <div class="faq-q-wrap">
+                                    <div class="faq-q-icon"><i class="fas fa-file-pdf"></i></div>
+                                    <span>How to generate a medical report?</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-arrow"></i>
+                            </button>
+                            <div class="faq-body">
+                                <p>Medical reports can be generated from the <strong>Reports</strong> section or
+                                    directly from a patient profile:</p>
+                                <ul>
+                                    <li>Open the patient's record</li>
+                                    <li>Click <strong>"Generate Report"</strong> in the top bar</li>
+                                    <li>Review the AI analysis and vitals charts</li>
+                                    <li>Optionally add <strong>Clinical Notes</strong> via the modal</li>
+                                    <li>Click <strong>"Export PDF"</strong> to download</li>
+                                </ul>
+                                <p>Reports include ECG waveform, vital trend charts, AI findings, and timeline.</p>
+                                <div class="faq-tip"><i class="fas fa-lightbulb"></i> Tip: Clinical Notes section only
+                                    appears in the PDF if you fill it in.</div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item slide-up" style="--d:.16s"
+                            data-keywords="alert alerts work critical warning notification auto ai">
+                            <button class="faq-btn" onclick="toggleFAQ(this)">
+                                <div class="faq-q-wrap">
+                                    <div class="faq-q-icon"><i class="fas fa-bell"></i></div>
+                                    <span>How do alerts work?</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-arrow"></i>
+                            </button>
+                            <div class="faq-body">
+                                <p>Safe Heart AI continuously monitors patient vitals and triggers alerts based on
+                                    thresholds:</p>
+                                <ul>
+                                    <li><strong class="text-red">Critical</strong> — Immediate intervention required
+                                        (e.g. SpO₂ &lt; 90%, HR &gt; 140 BPM)</li>
+                                    <li><strong class="text-amber">Warning</strong> — Parameters trending toward concern
+                                    </li>
+                                    <li><strong class="text-green">Stable</strong> — Vitals within acceptable range</li>
+                                </ul>
+                                <p>Alerts appear in the Alerts panel, in-app notifications, and optionally via email/SMS
+                                    (configurable in Settings).</p>
+                                <div class="faq-tip"><i class="fas fa-lightbulb"></i> Tip: Enable "Auto Alerts" in
+                                    Settings &gt; System Preferences for AI-driven predictive alerts.</div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item slide-up" style="--d:.18s"
+                            data-keywords="settings update save preferences profile password language dark mode">
+                            <button class="faq-btn" onclick="toggleFAQ(this)">
+                                <div class="faq-q-wrap">
+                                    <div class="faq-q-icon"><i class="fas fa-cog"></i></div>
+                                    <span>How to update settings?</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-arrow"></i>
+                            </button>
+                            <div class="faq-body">
+                                <p>Access <strong>Settings</strong> from the sidebar (bottom section). Available options
+                                    include:</p>
+                                <ul>
+                                    <li><strong>Profile Settings</strong> — name, email, hospital, photo</li>
+                                    <li><strong>System Preferences</strong> — dark mode, notifications, language</li>
+                                    <li><strong>Security</strong> — change password with strength indicator</li>
+                                    <li><strong>Notification Settings</strong> — critical, email, SMS toggles</li>
+                                </ul>
+                                <p>All changes take effect immediately after clicking <strong>Save</strong>.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item slide-up" style="--d:.20s"
+                            data-keywords="emergency contact call help urgent support phone">
+                            <button class="faq-btn" onclick="toggleFAQ(this)">
+                                <div class="faq-q-wrap">
+                                    <div class="faq-q-icon"><i class="fas fa-phone-alt"></i></div>
+                                    <span>How to contact emergency support?</span>
+                                </div>
+                                <i class="fas fa-chevron-down faq-arrow"></i>
+                            </button>
+                            <div class="faq-body">
+                                <p>For platform emergencies or urgent technical issues:</p>
+                                <ul>
+                                    <li><strong>Emergency Hotline:</strong> <code>+20 100 86</code> — 24/7</li>
+                                    <li><strong>Support Email:</strong> <code>support@safeheart.com</code></li>
+                                    <li><strong>Live Chat:</strong> Available Mon–Fri, 08:00–22:00</li>
+                                </ul>
+                                <p>For patient medical emergencies, contact the on-call cardiologist directly through
+                                    the hospital PABX system.</p>
+                                <div class="faq-tip faq-tip-red"><i class="fas fa-exclamation-circle"></i> For
+                                    life-threatening emergencies, call the local emergency number immediately.</div>
+                            </div>
+                        </div>
+
+                        <!-- No results -->
+                        <div class="no-results" id="noResults" style="display:none">
+                            <div class="nr-icon"><i class="fas fa-search"></i></div>
+                            <p>No articles found for "<span id="noResultsQuery"></span>"</p>
+                            <small>Try different keywords or browse the support cards</small>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- RIGHT: SUPPORT + QUICK ACTIONS -->
+                <div class="help-col-right">
+
+                    <!-- SUPPORT CARDS -->
+                    <div class="section-hdr slide-up" style="--d:.1s">
+                        <div class="section-icon"><i class="fas fa-headset"></i></div>
+                        <div>
+                            <h2>Support</h2>
+                            <p>Get direct assistance</p>
+                        </div>
+                    </div>
+
+                    <div class="support-card slide-up" style="--d:.15s">
+                        <div class="support-card-hdr">
+                            <div class="sc-icon teal-ico"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h3>Contact Support</h3>
+                                <p>Technical assistance & general queries</p>
+                            </div>
+                        </div>
+                        <div class="sc-detail"><i class="fas fa-envelope"></i> support@safeheart.com</div>
+                        <div class="sc-detail"><i class="fas fa-phone"></i> +20 100 861 1382</div>
+                        <div class="sc-detail"><i class="fas fa-clock"></i> Mon–Fri · 08:00–22:00</div>
+                        <button class="btn-teal" onclick="showToast('Opening support chat…')"><i
+                                class="fas fa-comments"></i> Contact Now</button>
+                    </div>
+
+                    <div class="support-card slide-up emergency-card" style="--d:.2s">
+                        <div class="support-card-hdr">
+                            <div class="sc-icon red-ico"><i class="fas fa-ambulance"></i></div>
+                            <div>
+                                <h3>Emergency Help</h3>
+                                <p>Critical platform issues — 24/7</p>
+                            </div>
+                        </div>
+                        <div class="sc-detail emergency-num"><i class="fas fa-phone-volume"></i> +20 100 861 1382</div>
+                        <div class="sc-detail"><i class="fas fa-shield-alt"></i> Priority response &lt; 5 minutes</div>
+                        <button class="btn-danger" onclick="callEmergency()"><i class="fas fa-phone-alt"></i> Call
+                            Now</button>
+                    </div>
+
+                    <div class="support-card slide-up" style="--d:.25s">
+                        <div class="support-card-hdr">
+                            <div class="sc-icon blue-ico"><i class="fas fa-book-open"></i></div>
+                            <div>
+                                <h3>Documentation</h3>
+                                <p>Full platform user manual</p>
+                            </div>
+                        </div>
+                        <div class="sc-detail"><i class="fas fa-file-alt"></i> User Guide v2.1 · PDF</div>
+                        <div class="sc-detail"><i class="fas fa-video"></i> Video tutorials available</div>
+                        <button class="btn-outline" onclick="showToast('Opening documentation…')"><i
+                                class="fas fa-external-link-alt"></i> Open Docs</button>
+                    </div>
+
+                    <!-- QUICK ACTIONS -->
+                    <div class="section-hdr slide-up" style="--d:.28s; margin-top:24px">
+                        <div class="section-icon"><i class="fas fa-bolt"></i></div>
+                        <div>
+                            <h2>Quick Actions</h2>
+                            <p>Navigate the platform</p>
+                        </div>
+                    </div>
+                    <div class="quick-actions slide-up" style="--d:.3s">
+                        <button class="qa-btn" onclick="showToast('Going to Dashboard…')"><i
+                                class="fas fa-th-large"></i><span>Dashboard</span></button>
+                        <button class="qa-btn" onclick="showToast('Going to Patients…')"><i
+                                class="fas fa-user-injured"></i><span>Patients</span></button>
+                        <button class="qa-btn" onclick="showToast('Going to Reports…')"><i
+                                class="fas fa-file-medical-alt"></i><span>Reports</span></button>
+                        <button class="qa-btn" onclick="showToast('Going to Alerts…')"><i
+                                class="fas fa-bell"></i><span>Alerts</span></button>
+                    </div>
+
+                </div><!-- end right col -->
+            </div><!-- end help-grid -->
+        </div><!-- end content -->
+    </div><!-- end page-wrap -->
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg">Done</span></div>
+
+    <script src="../js/help.js"></script>
+</body>
+
+</html>

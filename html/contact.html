@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Heart | faq</title>
+    <link rel="stylesheet" href="../CSS/contact.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/contact.css">
+</head>
+<body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../image/logo.png" alt="Logo">
+            <span>Safe Heart</span>
+        </div>
+    
+        <ul class="nav-links" id="navLinks">
+            <li><a href="./Home.html" class="">Home</a></li>
+            <li><a href="./About.html">About</a></li>
+            <li><a href="./News.html">News & Partnerships</a></li>
+            <li><a href="./faq.html">FAQ</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+        </ul>
+    
+        <button class="btn-download">Download App</button>
+    
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+    
+    <div class="overlay" id="overlay"></div>
+
+
+
+    <!-- ================= CONTACT SECTION ================= -->
+    <section class="contact-section">
+        <div class="container">
+    
+            <div class="contact-header text-center">
+                <h2 class="section-title">Contact Us</h2>
+                <p class="section-subtitle">
+                    We're here to support you. Reach out through any of our dedicated channels.
+                </p>
+            </div>
+    
+            <!-- Emergency Alert -->
+            <div class="emergency-alert">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>
+                    <strong>Medical Emergency:</strong>
+                    In case of a medical emergency, please go to the nearest hospital immediately.
+                </span>
+            </div>
+    
+            <!-- Contact Grid -->
+            <div class="contact-grid">
+    
+                <!-- FORM -->
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+    
+                    <div class="inquiry-types">
+                        <button class="tab-btn active" onclick="openTab('tech-form')">Technical</button>
+                        <button class="tab-btn" onclick="openTab('general-form')">General</button>
+                        <button class="tab-btn" onclick="openTab('emergency-form')">Emergency</button>
+                    </div>
+    
+                    <!-- Tech Form -->
+                    <div id="tech-form" class="tab-content" style="display:block;">
+                        <div class="input-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="John Doe">
+                        </div>
+    
+                        <div class="input-group">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="john@example.com">
+                        </div>
+    
+                        <div class="input-group">
+                            <label>Technical Issue</label>
+                            <input type="text" placeholder="e.g. Band synchronization error">
+                        </div>
+    
+                        <div class="input-group">
+                            <label>Message</label>
+                            <textarea placeholder="How can we help you?"></textarea>
+                        </div>
+    
+                        <button class="btn-send">
+                            Send Ticket <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+    
+                    <!-- General Form -->
+                    <div id="general-form" class="tab-content" style="display:none;">
+                        <div class="input-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="John Doe">
+                        </div>
+    
+                        <div class="input-group">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="john@example.com">
+                        </div>
+    
+                        <div class="input-group">
+                            <label>Subject</label>
+                            <input type="text" placeholder="e.g. Partnership, Careers">
+                        </div>
+    
+                        <div class="input-group">
+                            <label>Message</label>
+                            <textarea placeholder="Tell us about your inquiry..."></textarea>
+                        </div>
+    
+                        <button class="btn-send btn-dark">
+                            Send General Inquiry <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+    
+                    <!-- Emergency Form -->
+                    <div id="emergency-form" class="tab-content" style="display:none;">
+                        <div class="input-group">
+                            <label>Patient Name</label>
+                            <input type="text" placeholder="Full Name">
+                        </div>
+    
+                        <div class="input-group">
+                            <label>Emergency Phone</label>
+                            <input type="text" placeholder="+1 (800) EMERGENCY">
+                        </div>
+    
+                        <div class="input-group">
+                            <label>Describe Situation</label>
+                            <textarea placeholder="Provide critical details immediately..."></textarea>
+                        </div>
+    
+                        <button class="btn-send btn-danger">
+                            Submit Emergency Alert <i class="fas fa-exclamation-circle"></i>
+                        </button>
+                    </div>
+    
+                </div>
+    
+                <!-- INFO -->
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+    
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Customer Support</strong>
+                            <span>+1 (555) 123-4444</span>
+                        </div>
+                    </div>
+    
+                    <div class="info-item">
+                        <i class="fas fa-ambulance"></i>
+                        <div>
+                            <strong>Emergency Hotline</strong>
+                            <span>+1 (800) 911-SAFE</span>
+                        </div>
+                    </div>
+    
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email Address</strong>
+                            <span>safeheart.healthtech@gmail.com</span>
+                        </div>
+                    </div>
+    
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Working Hours</strong>
+                            <span>24/7 Monitoring Available</span>
+                        </div>
+                    </div>
+    
+                </div>
+    
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="main-footer">
+    
+        <div class="container footer-grid">
+    
+            <!-- BRAND -->
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <!-- <img src="../image/logo.png" alt="Safe Heart Logo"> -->
+                    <span>Safe Heart</span>
+                </div>
+    
+                <p>
+                    Smart medical monitoring system for real-time heart health tracking and predictive analytics.
+                </p>
+    
+                <div class="socials">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+    
+            <!-- LINKS -->
+            <div class="footer-links">
+                <div class="link-col">
+                    <h4>Product</h4>
+                    <a href="#">Features</a>
+                    <a href="../Hospital/html/login.html">Dashboard</a>
+                    <a href="#">Pricing</a>
+                </div>
+    
+                <div class="link-col">
+                    <h4>Company</h4>
+                    <a href="./About.html">About</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Blog</a>
+                </div>
+    
+                <div class="link-col">
+                    <h4>Support</h4>
+                    <a href="./contact.html">Contact</a>
+                    <a href="#">Help Center</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+    
+            <!-- NEWSLETTER FORM (RIGHT SIDE) -->
+            <div class="footer-form">
+                <h4>Stay Updated</h4>
+                <p>Get medical insights & updates.</p>
+    
+                <form>
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+    
+        </div>
+    
+        <div class="footer-bottom">
+            <p>© 2024 Safe Heart. All rights reserved.</p>
+        </div>
+    
+    </footer>
+    
+    <!-- ================= SCRIPTS ================= -->
+    <script src="../js/main.js"></script>
+    <script src="../js/contact.js"></script>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Title -->
+    <title>Safe Heart | Medical Monitoring System</title>
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- CSS -->
+     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/home.css" />
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../image/logo.png" alt="logo">
+            <span>Safe Heart</span>
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="./Home.html" class="">Home</a></li>
+            <li><a href="./About.html">About</a></li>
+            <li><a href="./News.html">News & Partnerships</a></li>
+            <li><a href="./faq.html">FAQ</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+        </ul>
+
+        <button class="btn-download">Download App</button>
+
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ================= HERO ================= -->
+    <header class="hero container">
+        <div class="hero-content">
+            <h1>
+                Smart Health Monitoring for a
+                <span>Safer Life</span>
+            </h1>
+
+            <p>
+                Safe Heart is an intelligent wearable system that monitors vital signs
+                in real-time, detects emergencies, and alerts caregivers instantly.
+            </p>
+
+            <div class="hero-btns">
+                <!-- <button class="btn-primary" >Get Started</button> -->
+                <button class="btn-primary" onclick="window.location.href='../Hospital/html/login.html'">Get Started</button>
+                <button class="btn-secondary">Download App</button>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="../image/img_home.jpeg" alt="Health Monitoring System" />
+        </div>
+    </header>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="about">
+        <div class="container text-center">
+            <h2>About Safe Heart</h2>
+            <p>
+                Safe Heart is designed to protect patients and elderly individuals by
+                continuously monitoring vital health data and providing instant
+                emergency alerts when abnormal conditions are detected.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================= FEATURES ================= -->
+    <section class="features container">
+        <h2 class="section-title">Features</h2>
+
+        <div class="features-grid">
+
+            <div class="f-card">
+                <i class="fas fa-heartbeat"></i>
+                <h3>Real-Time Monitoring</h3>
+                <p>Track vital signs anytime, anywhere.</p>
+            </div>
+
+            <div class="f-card">
+                <i class="fas fa-bell"></i>
+                <h3>Instant Alerts</h3>
+                <p>Receive emergency notifications immediately.</p>
+            </div>
+
+            <div class="f-card">
+                <i class="fas fa-user-md"></i>
+                <h3>Doctor Access</h3>
+                <p>Share reports with healthcare professionals.</p>
+            </div>
+
+            <div class="f-card">
+                <i class="fas fa-history"></i>
+                <h3>Health History</h3>
+                <p>Track your health data over time.</p>
+            </div>
+
+            <div class="f-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Secure Data</h3>
+                <p>Your medical data is fully protected.</p>
+            </div>
+
+            <div class="f-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>AI Analysis</h3>
+                <p>Smart insights based on health data.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= HOW IT WORKS ================= -->
+    <section class="how-it-works container">
+        <h2 class="section-title">How It Works</h2>
+
+        <div class="steps-flex">
+
+            <div class="step">
+                <span>1</span>
+                <p>Wear the Device</p>
+            </div>
+
+            <div class="step">
+                <span>2</span>
+                <p>Collect Data</p>
+            </div>
+
+            <div class="step">
+                <span>3</span>
+                <p>Send to App</p>
+            </div>
+
+            <div class="step">
+                <span>4</span>
+                <p>Analyze Data</p>
+            </div>
+
+            <div class="step">
+                <span>5</span>
+                <p>Send Alerts</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= MOBILE ================= -->
+    <section class="mobile-features container">
+        <div class="mobile-grid">
+
+            <div class="mobile-text">
+                <h2>Mobile App</h2>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Real-time Dashboard</li>
+                    <li><i class="fas fa-check-circle"></i> SOS Emergency Button</li>
+                    <li><i class="fas fa-check-circle"></i> Activity Tracking</li>
+                </ul>
+            </div>
+
+            <div class="mobile-img">
+                <img src="../image/app.jpeg" alt="Mobile App" />
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= DASHBOARD ================= -->
+    <section class="hospital-system">
+        <div class="container dash-grid">
+
+            <div class="dash-img">
+                <img src="../image/hosp.jpeg" alt="Hospital Dashboard" />
+            </div>
+
+            <div class="dash-text">
+                <h2>Hospital Dashboard</h2>
+                <p>Monitor multiple patients in real-time from one place.</p>
+
+                <ul>
+                    <li><i class="fas fa-circle-check"></i> Patient Management</li>
+                    <li><i class="fas fa-circle-check"></i> Remote Diagnostics</li>
+                    <li><i class="fas fa-circle-check"></i> Cloud Storage</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= WHY ================= -->
+    <section class="why-choose container text-center">
+        <h2 class="section-title">Why Choose Us</h2>
+
+        <div class="why-grid">
+            <div class="why-item"><i class="fas fa-star"></i>
+                <p>High Accuracy</p>
+            </div>
+            <div class="why-item"><i class="fas fa-clock"></i>
+                <p>24/7 Support</p>
+            </div>
+            <div class="why-item"><i class="fas fa-lock"></i>
+                <p>Secure System</p>
+            </div>
+            <div class="why-item"><i class="fas fa-award"></i>
+                <p>Trusted Technology</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TESTIMONIALS ================= -->
+    <section class="testimonials container">
+        <h2 class="section-title text-center">Testimonials</h2>
+
+        <div class="t-grid">
+
+            <div class="t-card">
+                <div class="quote-mark">“</div>
+                <p>Fast alerts saved a life in a critical moment.</p>
+                <div class="user-meta">
+                    <strong>User</strong>
+                    <span>Beta Tester</span>
+                </div>
+            </div>
+
+            <div class="t-card">
+                <div class="quote-mark">“</div>
+                <p>Easy system for hospital monitoring.</p>
+                <div class="user-meta">
+                    <strong>Doctor</strong>
+                    <span>Cardiologist</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= CONTACT SECTION ================= -->
+    <!-- <section class="contact-section">
+        <div class="container">
+    
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="contact-subtitle">
+                Have a question or need support? Send us a message.
+            </p>
+    
+            <div class="contact-grid"> -->
+    
+                <!-- Form -->
+                <!-- <form class="contact-form">
+    
+                    <div class="input-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+    
+                    <div class="input-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+    
+                    <div class="input-group">
+                        <input type="text" placeholder="Subject">
+                    </div>
+    
+                    <div class="input-group">
+                        <textarea rows="6" placeholder="Your Message"></textarea>
+                    </div>
+    
+                    <button type="submit" class="btn-primary">Send Message</button>
+    
+                </form> -->
+    
+                <!-- Info Box -->
+                <!-- <div class="contact-info">
+    
+                    <div class="info-card">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>support@safeheart.com</p>
+                        </div>
+                    </div>
+    
+                    <div class="info-card">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+20 100 000 0000</p>
+                        </div>
+                    </div>
+    
+                    <div class="info-card">
+                        <i class="fas fa-location-dot"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Egypt, Cairo</p>
+                        </div>
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+        </div>
+    </section> -->
+
+    <!-- ================= CTA ================= -->
+    <section class="start-monitoring">
+        <div class="container text-center">
+
+            <h2>Take Control of Your Health</h2>
+
+            <p>
+                Join users who trust Safe Heart for daily monitoring and safety.
+            </p>
+
+            <div class="cta-btns">
+                <button class="btn-white">Download App</button>
+                <button class="btn-outline-white" onclick="window.location.href='contact.html'">Contact Us</button>
+            </div>
+
+        </div>
+    </section>
+    
+
+    <!-- ================= FOOTER ================= -->
+<footer class="main-footer">
+
+    <div class="container footer-grid">
+
+        <!-- BRAND -->
+        <div class="footer-brand">
+            <div class="footer-logo">
+                <!-- <img src="../image/logo.png" alt="Safe Heart Logo"> -->
+                <span>Safe Heart</span>
+            </div>
+
+            <p>
+                Smart medical monitoring system for real-time heart health tracking and predictive analytics.
+            </p>
+
+            <div class="socials">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <!-- LINKS -->
+        <div class="footer-links">
+            <div class="link-col">
+                <h4>Product</h4>
+                <a href="#">Features</a>
+                <a href="../Hospital/html/login.html">Dashboard</a>
+                <a href="#">Pricing</a>
+            </div>
+
+            <div class="link-col">
+                <h4>Company</h4>
+                <a href="./About.html">About</a>
+                <a href="#">Careers</a>
+                <a href="#">Blog</a>
+            </div>
+
+            <div class="link-col">
+                <h4>Support</h4>
+                <a href="./contact.html">Contact</a>
+                <a href="#">Help Center</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+
+        <!-- NEWSLETTER FORM (RIGHT SIDE) -->
+        <div class="footer-form">
+            <h4>Stay Updated</h4>
+            <p>Get medical insights & updates.</p>
+
+            <form>
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2024 Safe Heart. All rights reserved.</p>
+    </div>
+
+</footer>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script src="../js/main.js"></script>
+
+    <script>
+        function startApp() {
+            localStorage.setItem("started", "true");
+            window.location.href = "./Hospital/html/login.html";
+        }
+    </script>
+
+</body>
+
+</html>

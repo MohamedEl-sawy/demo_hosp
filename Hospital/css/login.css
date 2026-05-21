@@ -1,0 +1,103 @@
+.login-section { height: 100vh; display: flex; align-items: center; justify-content: center; background: #eef7f7; padding: 20px; font-family: 'Inter', sans-serif; }
+.login-container { display: flex; width: 100%; max-width: 750px; height: 480px; background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.07); }
+.brand-side { flex: 1; background: #5bb4b4; display: flex; align-items: center; justify-content: center; padding: 0; }
+.logo-box { background: #fff; width: 180px; height: 180px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+.logo-img-div { width: 100px; height: 100px; background-image: url('logo.png'); background-size: contain; background-repeat: no-repeat; background-position: center; margin-bottom: 8px; }
+.logo-box span { color: #333; font-weight: 800; font-size: 1.1rem; }
+.form-side { flex: 1; background: #fff; padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+.form-side h2 { color: #5bb4b4; text-align: center; margin-bottom: 5px; font-weight: 700; font-size: 1.8rem; }
+.subtitle { text-align: center; font-size: 0.75rem; color: #999; margin-bottom: 25px; }
+.input-group { margin-bottom: 20px; position: relative; }
+.input-wrapper { border: 1.5px solid #e2e8f0; border-radius: 8px; padding: 10px 15px; position: relative; transition: 0.3s; }
+.input-group label { position: absolute; top: -9px; left: 12px; background: #fff; padding: 0 6px; font-size: 0.7rem; color: #777; font-weight: 600; z-index: 10; }
+.input-wrapper input { width: 100%; border: none; outline: none; font-size: 0.9rem; color: #333; }
+.input-wrapper i { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #5bb4b4; font-size: 0.8rem; transition: 0.3s; }
+.input-wrapper:focus-within { border-color: #5bb4b4; box-shadow: 0 0 0 4px rgba(91, 180, 180, 0.1); }
+.input-wrapper:focus-within label { color: #5bb4b4; }
+.btn-login { width: 100%; padding: 12px; background: #5bb4b4; color: #fff; border: none; border-radius: 25px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+.btn-login:hover { opacity: 0.9; transform: translateY(-2px); }
+.form-footer { text-align: center; margin-top: 20px; font-size: 0.75rem; border-top: 1px solid #eee; padding-top: 15px; }
+.form-footer a { color: #5bb4b4; text-decoration: none; font-weight: 700; }
+.error-msg {
+    color: #ff4b5c;
+    margin-top: 10px;
+    font-size: 13px;
+    text-align: center;
+    min-height: 18px;
+
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: all 0.3s ease;
+}
+.error-msg.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.success-msg {
+    color: #22c55e;
+}
+
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-6px);
+    }
+
+    50% {
+        transform: translateX(6px);
+    }
+
+    75% {
+        transform: translateX(-4px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.shake {
+    animation: shake 0.35s ease;
+}
+
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 9999;
+    max-width: 80%;
+    text-align: center;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.toast.success {
+    background: #22c55e;
+}
+
+.toast.error {
+    background: #ff4b5c;
+}
+.btn-login:active {
+    transform: scale(0.97);
+    opacity: 0.85;
+}
+.input-wrapper input {
+    font-size: 16px;
+}
+@media (max-width: 768px) { .login-container { flex-direction: column; height: auto; max-width: 400px; } .brand-side { padding: 40px; } }

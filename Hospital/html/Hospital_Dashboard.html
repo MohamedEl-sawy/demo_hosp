@@ -1,0 +1,703 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Safe Heart | Hospital Dashboard</title>
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <!-- Chart -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="../css/hospital_dashboard.css">
+    </head>
+    <body>
+
+    <div class="dashboard-container">
+
+        <!-- PAGE LOADER -->
+        <!-- <div class="page-loader" id="pageLoader">
+            <div class="loader-heart"><i class="fas fa-heartbeat"></i></div>
+        </div>
+         -->
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sb-logo">
+                <div class="sb-logo-icon">
+                    <!-- <i class="fas fa-heartbeat"></i> -->
+                    <img src="../image/logo.png" alt="">
+                </div>
+                <div class="sb-logo-text">
+                    <h3>Safe Heart</h3>
+                    <p>Heart Care Hospital</p>
+                </div>
+            </div>
+            <!-- <div class="sb-divider"></div> -->
+            <nav class="sb-nav">
+                <a href="./Hospital_Dashboard.html" class="sb-link"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+                <a href="./patient.html" class="sb-link"><i class="fas fa-user-injured"></i><span>Patients</span></a>
+                <a href="./Alert.html" class="sb-link"><i class="fas fa-bell"></i><span>Alerts</span><em class="nav-dot">3</em></a>
+                <a href="./Report.html" class="sb-link"><i class="fas fa-file-medical-alt"></i><span>Reports</span></a>
+                <div class="sb-divider"></div>
+                <a href="./Setting.html" class="sb-link"><i class="fas fa-cog"></i><span>Settings</span></a>
+                <a href="./help.html" class="sb-link"><i class="fas fa-question-circle"></i><span>Help</span></a>
+            </nav>
+            <div class="sb-bottom">
+                <div class="sb-user">
+                    <div class="sb-avatar">AD</div>
+                    <div class="sb-user-info">
+                        <p>Admin</p><small>Hospital Manager</small>
+                    </div>
+                </div>
+                <div class="sb-btns">
+                    <button class="sb-btn lock" id="lockBtn"><i class="fas fa-lock"></i> Lock</button>
+                    <button class="sb-btn logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+            </div>
+            <!-- <div class="lock-screen" id="lockScreen">
+                <div class="lock-icon"><i class="fas fa-lock"></i></div>
+                <h3>Screen Locked</h3>
+                <p>Enter PIN to unlock</p>
+                <input class="lock-input" type="password" id="lockPin" placeholder="Enter PIN" maxlength="4">
+                <button class="lock-unlock-btn" id="unlockBtn">Unlock</button>
+            </div> -->
+        </aside>
+        
+        <div class="overlay" id="overlay"></div>
+
+        <!-- ================= MAIN ================= -->
+        <main class="content">
+
+            <!-- ================= MENU BUTTON ================= -->
+            <!-- <div class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            -->
+            <!-- ================= TOP BAR ================= -->
+
+            <div class="header">
+                <div class="menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="profile-section">
+                    <div class="icon-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="dot"></span>
+                    </div>
+                    <div class="icon-btn">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="user">
+                        <img src="../image/user.jpg" alt="">
+                        <div>
+                            <h4>Admin</h4>
+                            <p>Hospital Manager</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= OVERVIEW SECTION ================= -->
+            <section class="overview">
+            
+                <div class="page-title">
+                    <div>
+                        <h1>Hospital Overview</h1>
+                        <p>Real-time monitoring and analytics — Heart Care Hospital</p>
+                    </div>
+                    <div class="live-badge">Live</div>
+                </div>
+            
+                <!-- STAT CARDS -->
+                <div class="stat-cards">
+                    <div class="stat-card accent-blue">
+                        <div class="card-label"><i class="fas fa-users"></i> Registered patients</div>
+                        <h2>248</h2>
+                        <p>Total in system</p>
+                        <span class="badge badge-info">↑ 12.5% this week</span>
+                    </div>
+                    <div class="stat-card accent-teal">
+                        <div class="card-label"><i class="fas fa-hospital"></i> Currently admitted</div>
+                        <h2>63</h2>
+                        <p>In-patients now</p>
+                        <span class="badge badge-success">14 discharged today</span>
+                    </div>
+                    <div class="stat-card accent-red">
+                        <div class="card-label"><i class="fas fa-exclamation-circle"></i> Critical cases</div>
+                        <h2>18</h2>
+                        <p>Require attention</p>
+                        <span class="badge badge-danger">5 new today</span>
+                    </div>
+                    <div class="stat-card accent-green">
+                        <div class="card-label"><i class="fas fa-check-circle"></i> Stable cases</div>
+                        <h2>230</h2>
+                        <p>92.7% of total</p>
+                        <span class="badge badge-success">Monitoring active</span>
+                    </div>
+                    <div class="stat-card accent-amber wide">
+                        <div>
+                            <div class="card-label"><i class="fas fa-bell"></i> Active Alerts</div>
+                            <h2>7</h2>
+                            <p>Unresolved now</p>
+                            <span class="badge badge-warn">Last: 2 min ago</span>
+                        </div>
+                        <div class="wide-divider"></div>
+                        <div class="wide-alerts">
+                            <div class="mini-alert">
+                                <div class="mini-alert-icon danger"><i class="fas fa-heartbeat"></i></div>
+                                <div class="mini-alert-body"><strong>High Heart Rate</strong><small>James Moore · Room 204</small></div>
+                                <span class="mini-alert-val danger">145 bpm</span>
+                            </div>
+                            <div class="mini-alert">
+                                <div class="mini-alert-icon danger"><i class="fas fa-lungs"></i></div>
+                                <div class="mini-alert-body"><strong>Low SpO₂</strong><small>Fatima Ali · Room 118</small></div>
+                                <span class="mini-alert-val danger">88%</span>
+                            </div>
+                            <div class="mini-alert">
+                                <div class="mini-alert-icon warn"><i class="fas fa-tachometer-alt"></i></div>
+                                <div class="mini-alert-body"><strong>High BP</strong><small>Ahmed · Room 204</small></div>
+                                <span class="mini-alert-val warn">160/95</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                
+            
+                <!-- PATIENT SEARCH -->
+                <!-- ================= PATIENT SEARCH ================= -->
+                <div class="patient-search-bar">
+                
+                    <div class="search-input-wrap" style="position: relative;">
+                
+                        <i class="fas fa-id-card"></i>
+                
+                        <input type="text" id="patientIdInput" placeholder="Enter patient ID (e.g. SH-00412)..." autocomplete="off" />
+                
+                        <!-- 🔥 DROPDOWN SUGGESTIONS -->
+                        <div id="patientSuggestions" class="suggestions-box"></div>
+                
+                    </div>
+                
+                    <button id="searchPatientBtn">Search Patient</button>
+                
+                </div>
+                
+                
+                <!-- ================= PATIENT MANAGEMENT ================= -->
+                <div class="pt-actions-row">
+                
+                    <button class="pt-action-btn add" onclick="openAdmitModal()">
+                        <i class="fas fa-user-plus"></i> Admit Patient
+                    </button>
+                
+                    <button class="pt-action-btn remove" onclick="openDischargeModal()">
+                        <i class="fas fa-user-minus"></i> Discharge Patient
+                    </button>
+                </div>
+                
+                <!-- PATIENT TABLE -->
+                <div class="pt-panel">
+                    <div class="pt-panel-head">
+                        <h3>Current In-Patients</h3>
+                        <span class="badge badge-success" id="pt-count">4 patients</span>
+                    </div>
+                    <table class="pt-table">
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>ID</th>
+                                <th>Room</th>
+                                <th>Status</th>
+                                <th>Admitted</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="pt-tbody"></tbody>
+                    </table>
+                </div>
+                
+                <!-- ADMIT MODAL -->
+                <div class="modal-overlay" id="admitModal">
+                    <div class="modal-box">
+                        <div class="modal-header">
+                            <h3>Admit New Patient</h3>
+                            <button class="modal-close" onclick="closeAdmitModal()">✕</button>
+                        </div>
+                        <div class="pt-form-grid">
+                            <div class="pt-form-group full">
+                                <label>Full Name</label>
+                                <input type="text" id="f-name" placeholder="e.g. Ahmed Mohamed">
+                            </div>
+                            <div class="pt-form-group">
+                                <label>Patient ID</label>
+                                <input type="text" id="f-id" placeholder="SH-00XXX">
+                            </div>
+                            <div class="pt-form-group">
+                                <label>Room</label>
+                                <input type="text" id="f-room" placeholder="e.g. 205">
+                            </div>
+                            <div class="pt-form-group">
+                                <label>Department</label>
+                                <input type="text" id="f-dept" placeholder="e.g. Cardiology">
+                            </div>
+                            <div class="pt-form-group">
+                                <label>Status</label>
+                                <select id="f-status">
+                                    <option value="Stable">Stable</option>
+                                    <option value="Critical">Critical</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pt-form-actions">
+                            <button class="pt-form-btn cancel" onclick="closeAdmitModal()">Cancel</button>
+                            <button class="pt-form-btn primary" onclick="admitPatient()">Admit Patient</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DISCHARGE CONFIRM MODAL -->
+                <div class="modal-overlay" id="dischargeModal">
+                    <div class="modal-box" style="max-width: 380px;">
+                        <div class="modal-header">
+                            <h3>Discharge Patient</h3>
+                            <button class="modal-close" onclick="closeDischargeModal()">✕</button>
+                        </div>
+                        <div class="del-body">
+                            <div class="del-icon"><i class="fas fa-sign-out-alt"></i></div>
+                            <h4 id="discharge-name">Patient Name</h4>
+                            <p>Are you sure you want to discharge this patient?</p>
+                        </div>
+                        <div class="del-actions">
+                            <button class="del-btn cancel" onclick="closeDischargeModal()">Cancel</button>
+                            <button class="del-btn confirm" onclick="confirmDischarge()">Discharge</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- LOGOUT MODAL -->
+                <div class="modal-overlay" id="logoutModal">
+                    <div class="modal-box" style="max-width: 360px;">
+                        <div class="modal-header">
+                            <h3>Log Out</h3>
+                            <button class="modal-close" onclick="closeLogoutModal()">✕</button>
+                        </div>
+                        <div class="del-body">
+                            <div class="del-icon" style="background:#E6F1FB">
+                                <i class="fas fa-sign-out-alt" style="color:#185FA5"></i>
+                            </div>
+                            <h4>Are you sure?</h4>
+                            <p>You will be logged out of the dashboard.</p>
+                        </div>
+                        <div class="del-actions">
+                            <button class="del-btn cancel" onclick="closeLogoutModal()">Cancel</button>
+                            <button class="del-btn confirm" style="background:#185FA5" onclick="closeLogoutModal()">Log Out</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- TOAST -->
+                <div class="toast-notification" id="toast">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="toast-msg"></span>
+                </div>
+            
+                <!-- PATIENT MODAL -->
+                <div class="modal-overlay" id="patientModal">
+                    <div class="modal-box">
+                        <div class="modal-header">
+                            <h3>Patient Record</h3>
+                            <button class="modal-close" id="closeModal">✕</button>
+                        </div>
+                        <div class="patient-profile">
+                            <div class="patient-avatar">AM</div>
+                            <div class="patient-info">
+                                <h4>Ahmed Mohamed</h4>
+                                <p>ID: SH-00412 · Room 204 — Cardiology</p>
+                                <div class="status-pills">
+                                    <span class="pill pill-critical">● Critical</span>
+                                    <span class="pill pill-inpatient">In-patient</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="patient-details">
+                            <div class="detail-row"><span>Age</span><strong>47 years</strong></div>
+                            <div class="detail-row"><span>Blood type</span><strong>A+</strong></div>
+                            <div class="detail-row"><span>Admitted</span><strong>12 May 2026</strong></div>
+                            <div class="detail-row"><span>Physician</span><strong>Dr. Khalid Omar</strong></div>
+                            <div class="detail-row"><span>Diagnosis</span><strong>Acute MI</strong></div>
+                            <div class="detail-row"><span>Band ID</span><strong>BND-7731</strong></div>
+                        </div>
+                        <div class="vitals-grid">
+                            <div class="vital-card critical-vital">
+                                <span>145</span><small>Heart rate (bpm)</small>
+                            </div>
+                            <div class="vital-card">
+                                <span>140/90</span><small>Blood pressure</small>
+                            </div>
+                            <div class="vital-card">
+                                <span>37.4°</span><small>Temperature</small>
+                            </div>
+                            <div class="vital-card">
+                                <span>96%</span><small>SpO₂</small>
+                            </div>
+                            <div class="vital-card">
+                                <span>18</span><small>Resp. rate</small>
+                            </div>
+                            <div class="vital-card critical-vital">
+                                <span>High</span><small>Alert status</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- BOTTOM ROW -->
+                <div class="bottom-row">
+                    <div class="activity-log">
+                        <div class="log-header">
+                            <h3>Recent Activity</h3>
+                            <a href="#">View All</a>
+                        </div>
+                        <div class="activity-item">
+                            <div class="a-icon admit"><i class="fas fa-user-plus"></i></div>
+                            <div class="a-text">
+                                <p>New patient admitted</p>
+                                <small>John Doe · Room 203 · Cardiology</small>
+                            </div>
+                            <span class="a-time">3 min</span>
+                        </div>
+                        <div class="activity-item">
+                            <div class="a-icon update"><i class="fas fa-heartbeat"></i></div>
+                            <div class="a-text">
+                                <p>Vitals updated</p>
+                                <small>Sarah Williams · Room 412 · All stable</small>
+                            </div>
+                            <span class="a-time">15 min</span>
+                        </div>
+                        <div class="activity-item">
+                            <div class="a-icon alert"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="a-text">
+                                <p>High heart rate alert</p>
+                                <small>James Moore · Room 204 · 145 bpm</small>
+                            </div>
+                            <span class="a-time">22 min</span>
+                        </div>
+                        <div class="activity-item">
+                            <div class="a-icon discharge"><i class="fas fa-sign-out-alt"></i></div>
+                            <div class="a-text">
+                                <p>Patient discharged</p>
+                                <small>Nour Hassan · Room 110 · Recovered</small>
+                            </div>
+                            <span class="a-time">1 hr</span>
+                        </div>
+                    </div>
+            
+                    <div class="alerts-sidebar">
+                        <h3>Critical Alerts <span class="badge badge-danger">3 active</span></h3>
+                        <div class="alert-card red">
+                            <div>
+                                <p>High Heart Rate</p><small>James Moore · Room 204</small>
+                            </div>
+                            <span>145 bpm</span>
+                        </div>
+                        <div class="alert-card red">
+                            <div>
+                                <p>Low SpO₂</p><small>Fatima Ali · Room 118</small>
+                            </div>
+                            <span>88%</span>
+                        </div>
+                        <div class="alert-card amber">
+                            <div>
+                                <p>High Blood Pressure</p><small>Ahmed Mohamed · Room 204</small>
+                            </div>
+                            <span>160/95</span>
+                        </div>
+                    </div>
+                </div>
+            
+            </section>
+
+        </main>
+
+    </div>
+
+    <div class="lock-screen" id="lockScreen">
+        <div class="lock-icon"><i class="fas fa-lock"></i></div>
+        <h3>Screen Locked</h3>
+        <p>Enter your PIN to unlock</p>
+        <input class="lock-pin-input" type="password" id="lockPin" maxlength="4">
+        <button class="lock-unlock-btn" onclick="unlockScreen()">Unlock</button>
+    </div>
+
+
+    <!-- <div class="overlay"></div> -->
+
+    </body>
+    <!-- <script>
+        const sidebar = document.querySelector(".sidebar");
+        const menuBtn = document.querySelector(".menu-btn");
+        const overlay = document.querySelector(".overlay");
+
+        menuBtn.addEventListener("click", () => {
+            sidebar.classList.add("active");
+            overlay.classList.add("active");
+        });
+
+        overlay.addEventListener("click", () => {
+            sidebar.classList.remove("active");
+            overlay.classList.remove("active");
+        });
+
+
+        // Patient Search Modal
+            const patientModal = document.getElementById("patientModal");
+            document.getElementById("searchPatientBtn").addEventListener("click", () => {
+                const id = document.getElementById("patientIdInput").value.trim();
+                if (id) patientModal.classList.add("active");
+            });
+            document.getElementById("patientIdInput").addEventListener("keydown", (e) => {
+                if (e.key === "Enter") document.getElementById("searchPatientBtn").click();
+            });
+            document.getElementById("closeModal").addEventListener("click", () => {
+                patientModal.classList.remove("active");
+            });
+            patientModal.addEventListener("click", (e) => {
+                if (e.target === patientModal) patientModal.classList.remove("active");
+            });        
+    </script> -->
+    <script>
+        // // ===== DATA =====
+        // var patients = [
+        //     { name: 'John Doe', id: 'SH-00203', room: '203', dept: 'Cardiology', status: 'Stable', admitted: '10 May 2026' },
+        //     { name: 'Sarah Williams', id: 'SH-00412', room: '412', dept: 'ICU', status: 'Critical', admitted: '11 May 2026' },
+        //     { name: 'James Moore', id: 'SH-00204', room: '204', dept: 'Cardiology', status: 'Critical', admitted: '12 May 2026' },
+        //     { name: 'Nour Hassan', id: 'SH-00110', room: '110', dept: 'General', status: 'Stable', admitted: '13 May 2026' }
+        // ];
+        // var deleteTarget = -1;
+        // var discharged = 0;
+
+        // // ===== SIDEBAR =====
+        // const sidebar = document.querySelector(".sidebar");
+        // const menuBtn = document.querySelector(".menu-btn");
+        // const overlay = document.querySelector(".overlay");
+
+        // menuBtn.addEventListener("click", () => {
+        //     sidebar.classList.add("active");
+        //     overlay.classList.add("active");
+        // });
+        // overlay.addEventListener("click", () => {
+        //     sidebar.classList.remove("active");
+        //     overlay.classList.remove("active");
+        // });
+
+        // // ===== LOCK SCREEN =====
+        // function lockScreen() {
+        //     document.getElementById("lockScreen").classList.add("active");
+        //     document.body.style.overflow = "hidden"; // يمنع السكرول
+        // }
+
+        // function unlockScreen() {
+        //         const pin = document.getElementById("lockPin").value;
+
+        //         if (pin === "SH01") {
+        //             document.getElementById("lockScreen").classList.remove("active");
+        //             document.body.style.overflow = "auto";
+        //             document.getElementById("lockPin").value = "";
+
+        //             showToast("Unlocked successfully", "success");
+        //         } else {
+        //             showToast("Wrong PIN", "error");
+
+        //             // يهزّ الانبوت (اختياري UI لطيف)
+        //             const input = document.getElementById("lockPin");
+        //             input.style.borderColor = "#ef4444";
+        //             setTimeout(() => {
+        //                 input.style.borderColor = "rgba(255,255,255,.1)";
+        //             }, 600);
+        //         }
+        //     }
+
+        // document.getElementById("lockPin").addEventListener("keydown", (e) => {
+        //     if (e.key === "Enter") unlockScreen();
+        // });
+
+        // // ===== LOGOUT =====
+        // function showLogoutModal() { document.getElementById("logoutModal").classList.add("active"); }
+        // function closeLogoutModal() { document.getElementById("logoutModal").classList.remove("active"); }
+
+        // // ===== ADMIT MODAL =====
+        // function openAdmitModal() { document.getElementById("admitModal").classList.add("active"); }
+        // function closeAdmitModal() { document.getElementById("admitModal").classList.remove("active"); }
+
+        // // ===== DISCHARGE MODAL =====
+        // function openDischargeModal() {
+        //     if (patients.length === 0) { showToast("No patients to discharge", "error"); return; }
+        //     deleteTarget = 0;
+        //     document.getElementById("discharge-name").textContent = patients[0].name;
+        //     document.getElementById("dischargeModal").classList.add("active");
+        // }
+        // function closeDischargeModal() {
+        //     document.getElementById("dischargeModal").classList.remove("active");
+        //     deleteTarget = -1;
+        // }
+        // function openRowDischarge(i) {
+        //     deleteTarget = i;
+        //     document.getElementById("discharge-name").textContent = patients[i].name;
+        //     document.getElementById("dischargeModal").classList.add("active");
+        // }
+
+        // // ===== ADMIT PATIENT =====
+        // function admitPatient() {
+        //     const name = document.getElementById("f-name").value.trim();
+        //     const id = document.getElementById("f-id").value.trim();
+        //     const room = document.getElementById("f-room").value.trim();
+        //     const dept = document.getElementById("f-dept").value.trim();
+        //     const status = document.getElementById("f-status").value;
+
+        //     if (!name || !id || !room) { alert("Please fill in Name, ID and Room"); return; }
+
+        //     const today = new Date();
+        //     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        //     const date = today.getDate() + ' ' + months[today.getMonth()] + ' ' + today.getFullYear();
+
+        //     patients.push({ name, id, room, dept: dept || 'General', status, admitted: date });
+        //     closeAdmitModal();
+
+        //     document.getElementById("f-name").value = "";
+        //     document.getElementById("f-id").value = "";
+        //     document.getElementById("f-room").value = "";
+        //     document.getElementById("f-dept").value = "";
+
+        //     renderTable();
+        //     showToast(name + " admitted successfully", "success");
+        // }
+
+        // // ===== DISCHARGE PATIENT =====
+        // function confirmDischarge() {
+        //     if (deleteTarget < 0) return;
+        //     const name = patients[deleteTarget].name;
+        //     patients.splice(deleteTarget, 1);
+        //     discharged++;
+        //     closeDischargeModal();
+        //     renderTable();
+        //     showToast(name + " discharged", "success");
+        // }
+
+        // // ===== RENDER TABLE =====
+        // function initials(n) {
+        //     return n.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+        // }
+
+        // function renderTable() {
+        //     const tb = document.getElementById("pt-tbody");
+        //     tb.innerHTML = "";
+        //     patients.forEach((p, i) => {
+        //         const cr = p.status === "Critical";
+        //         tb.innerHTML += `
+        //     <tr>
+        //         <td><div class="pt-name-cell">
+        //             <div class="pt-avatar-sm">${initials(p.name)}</div>${p.name}
+        //         </div></td>
+        //         <td class="pt-id">${p.id}</td>
+        //         <td>Rm ${p.room}</td>
+        //         <td><div class="pt-status-cell">
+        //             <div class="status-dot ${cr ? 'critical' : 'stable'}"></div>${p.status}
+        //         </div></td>
+        //         <td class="pt-id">${p.admitted}</td>
+        //         <td><button class="row-discharge-btn" onclick="openRowDischarge(${i})">
+        //             <i class="fas fa-sign-out-alt"></i>
+        //         </button></td>
+        //     </tr>`;
+        //     });
+        //     document.getElementById("pt-count").textContent = patients.length + " patients";
+        //     document.getElementById("chip-discharged").textContent = discharged + " discharged today";
+        //     updateStats();
+        // }
+
+        // // ===== ANIMATE NUMBERS =====
+        // function animateCount(id, target) {
+        //     const el = document.getElementById(id);
+        //     el.classList.remove("count-animate");
+        //     void el.offsetWidth;
+        //     el.classList.add("count-animate");
+        //     let start = 0;
+        //     const duration = 900;
+        //     let startTime = null;
+        //     const step = (ts) => {
+        //         if (!startTime) startTime = ts;
+        //         const prog = Math.min((ts - startTime) / duration, 1);
+        //         const ease = 1 - Math.pow(1 - prog, 3);
+        //         el.textContent = Math.round(ease * target);
+        //         if (prog < 1) requestAnimationFrame(step);
+        //     };
+        //     requestAnimationFrame(step);
+        // }
+
+        // function updateStats() {
+        //     const admitted = patients.length;
+        //     const critical = patients.filter(p => p.status === "Critical").length;
+        //     const stable = patients.filter(p => p.status === "Stable").length;
+        //     const total = 244 + admitted;
+
+        //     animateCount("num-total", total);
+        //     animateCount("num-admitted", admitted);
+        //     animateCount("num-critical", critical);
+        //     animateCount("num-stable", stable);
+        // }
+
+        // // ===== TOAST =====
+        // function showToast(msg, type) {
+        //     const toast = document.getElementById("toast");
+        //     document.getElementById("toast-msg").textContent = msg;
+        //     toast.className = "toast-notification show " + (type || "success");
+        //     setTimeout(() => toast.classList.remove("show"), 3000);
+        // }
+
+        // // إغلاق الـ sidebar لما تدوس على أي لينك (mobile)
+        //     document.querySelectorAll(".menu a").forEach(link => {
+        //         link.addEventListener("click", () => {
+        //             sidebar.classList.remove("active");
+        //             overlay.classList.remove("active");
+        //         });
+        //     });
+        // // ===== INIT =====
+        // renderTable();
+        // function lockScreen() {
+        //         document.getElementById("lockScreen").classList.add("active");
+        //         document.body.style.overflow = "hidden";
+
+        //         // إغلاق الـ sidebar لو كان مفتوح
+        //         sidebar.classList.remove("active");
+        //         overlay.classList.remove("active");
+        //     }
+
+            
+        //   // ===== PAGE LOADER =====
+        //     window.addEventListener('load', () => {
+        //         const loader = document.getElementById('pageLoader');
+        //         loader.classList.add('hidden');
+        //         setTimeout(() => {
+        //             loader.style.display = 'none';
+        //         }, 500);
+        //     });
+
+        //     // Fallback - لو الـ load اتأخر أكتر من 3 ثواني
+        //     setTimeout(() => {
+        //         const loader = document.getElementById('pageLoader');
+        //         if (loader) {
+        //             loader.classList.add('hidden');
+        //             setTimeout(() => loader.style.display = 'none', 500);
+        //         }
+        //     }, 3000);
+            
+    </script>
+    <script type="module" src="../js/dashboard.js"></script>
+    </html>

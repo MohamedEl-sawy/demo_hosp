@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Heart | Alerts</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/Alert.css">
+</head>
+
+<body>
+
+    <!-- PAGE LOADER -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-heart"><i class="fas fa-heartbeat"></i></div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sb-logo">
+            <div class="sb-logo-icon">
+                <img src="../image/logo.png" alt="">
+            </i></div>
+            <div class="sb-logo-text">
+                <h3>Safe Heart</h3>
+                <p>Heart Care Hospital</p>
+            </div>
+        </div>
+        <nav class="sb-nav">
+            <a href="./Hospital_Dashboard.html" class="sb-link"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+            <a href="./patient.html" class="sb-link"><i class="fas fa-user-injured"></i><span>Patients</span></a>
+            <a href="./Alert.html" class="sb-link">
+                <i class="fas fa-bell"></i><span>Alerts</span>
+                <em class="nav-dot" id="navAlertCount">0</em>
+            </a>
+            <a href="./Report.html" class="sb-link"><i class="fas fa-file-medical-alt"></i><span>Reports</span></a>
+            <div class="sb-divider"></div>
+            <a href="#" class="sb-link"><i class="fas fa-cog"></i><span>Settings</span></a>
+            <a href="#" class="sb-link"><i class="fas fa-question-circle"></i><span>Help</span></a>
+        </nav>
+        <div class="sb-bottom">
+            <div class="sb-user">
+                <div class="sb-avatar">AD</div>
+                <div class="sb-user-info">
+                    <p>Admin</p><small>Hospital Manager</small>
+                </div>
+            </div>
+            <div class="sb-btns">
+                <button class="sb-btn lock" id="lockBtn"><i class="fas fa-lock"></i> Lock</button>
+                <button class="sb-btn logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+        <div class="lock-screen" id="lockScreen">
+            <div class="lock-icon"><i class="fas fa-lock"></i></div>
+            <h3>Screen Locked</h3>
+            <p>Enter PIN to unlock</p>
+            <input class="lock-input" type="password" id="lockPin" placeholder="Enter PIN" maxlength="4">
+            <button class="lock-unlock-btn" id="unlockBtn">Unlock</button>
+        </div>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <!-- MAIN -->
+    <main class="content">
+
+        <header class="header">
+            <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+            <div class="header-right">
+                <div class="icon-btn notif"><i class="fas fa-bell"></i><span class="badge-dot"></span></div>
+                <div class="icon-btn"><i class="fas fa-envelope"></i></div>
+                <div class="hdr-user">
+                    <div class="hdr-avatar">AD</div>
+                    <div>
+                        <p>Admin</p><small>Hospital Manager</small>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <div class="page-hero">
+            <div>
+                <h1 class="hero-title">Alerts Center</h1>
+                <p class="hero-sub">Real-time patient alert monitoring and response</p>
+            </div>
+            <div class="hero-right">
+                <div class="live-badge"><span class="live-pulse"></span>Live Monitoring</div>
+                <button class="resolve-all-btn" id="resolveAllBtn"><i class="fas fa-check-double"></i> Resolve
+                    All</button>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card sc-total">
+                <div class="stat-icon-wrap"><i class="fas fa-bell"></i></div>
+                <div class="stat-info"><span class="stat-num" id="statTotal">0</span><span class="stat-lbl">Total
+                        Alerts</span></div>
+                <span class="stat-trend neutral"><i class="fas fa-minus"></i> All time</span>
+            </div>
+            <div class="stat-card sc-active">
+                <div class="stat-icon-wrap"><i class="fas fa-bolt"></i></div>
+                <div class="stat-info"><span class="stat-num" id="statActive">0</span><span class="stat-lbl">Active
+                        Alerts</span></div>
+                <span class="stat-trend up"><i class="fas fa-arrow-up"></i> Right now</span>
+            </div>
+            <div class="stat-card sc-critical">
+                <div class="stat-icon-wrap"><i class="fas fa-exclamation-circle"></i></div>
+                <div class="stat-info"><span class="stat-num" id="statCritical">0</span><span class="stat-lbl">Critical
+                        Alerts</span></div>
+                <span class="stat-trend danger"><i class="fas fa-exclamation"></i> Urgent</span>
+            </div>
+            <div class="stat-card sc-resolved">
+                <div class="stat-icon-wrap"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-info"><span class="stat-num" id="statResolved">0</span><span class="stat-lbl">Resolved
+                        Today</span></div>
+                <span class="stat-trend down"><i class="fas fa-arrow-down"></i> Good</span>
+            </div>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="filters-zone">
+            <div class="filter-group">
+                <span class="filter-label"><i class="fas fa-filter"></i> Status</span>
+                <div class="filter-pills" id="statusFilters">
+                    <button class="fpill active" data-status="all">All</button>
+                    <button class="fpill fpill-critical" data-status="Critical">Critical</button>
+                    <button class="fpill fpill-warning" data-status="Warning">Warning</button>
+                    <button class="fpill fpill-resolved" data-status="Resolved">Resolved</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label"><i class="fas fa-clock"></i> Time</span>
+                <div class="filter-pills" id="timeFilters">
+                    <button class="fpill active" data-time="today">Today</button>
+                    <button class="fpill" data-time="24h">Last 24h</button>
+                    <button class="fpill" data-time="week">This Week</button>
+                </div>
+            </div>
+            <div class="filter-group sort-group">
+                <span class="filter-label"><i class="fas fa-sort"></i> Sort</span>
+                <select class="sort-select" id="sortSelect">
+                    <option value="severity">By Severity</option>
+                    <option value="time">By Time</option>
+                    <option value="patient">By Patient</option>
+                </select>
+            </div>
+            <div class="alert-count-wrap">
+                <span id="alertCountLabel">Showing 0 alerts</span>
+            </div>
+        </div>
+
+        <!-- ALERTS GRID -->
+        <div class="alerts-grid" id="alertsGrid"></div>
+
+        <!-- EMPTY STATE -->
+        <div class="empty-state" id="emptyState">
+            <div class="empty-ico"><i class="fas fa-bell-slash"></i></div>
+            <h3>No Alerts Found</h3>
+            <p>No alerts match the current filter criteria.</p>
+        </div>
+
+    </main>
+
+    <!-- ══════════════ ALERT DETAIL MODAL ══════════════ -->
+    <div class="modal-bg" id="detailModal">
+        <div class="modal-box detail-box">
+            <div class="modal-hdr">
+                <div>
+                    <h3 id="modalTitle">Alert Details</h3>
+                    <p id="modalSubtitle">Patient information</p>
+                </div>
+                <button class="modal-x" id="closeDetailBtn"><i class="fas fa-times"></i></button>
+            </div>
+
+            <div class="detail-grid">
+                <!-- Patient Info -->
+                <div class="detail-section">
+                    <h4 class="section-title"><i class="fas fa-user"></i> Patient Information</h4>
+                    <div class="detail-info-grid">
+                        <div class="di-row"><span>Name</span><strong id="dPatientName"></strong></div>
+                        <div class="di-row"><span>Patient ID</span><strong id="dPatientId"></strong></div>
+                        <div class="di-row"><span>Room</span><strong id="dRoom"></strong></div>
+                        <div class="di-row"><span>Department</span><strong id="dDept"></strong></div>
+                        <div class="di-row"><span>Age</span><strong id="dAge"></strong></div>
+                        <div class="di-row"><span>Blood Type</span><strong id="dBlood"></strong></div>
+                    </div>
+                </div>
+
+                <!-- Emergency Contact -->
+                <div class="detail-section emergency-section">
+                    <h4 class="section-title warning-title"><i class="fas fa-phone-alt"></i> Emergency Contact</h4>
+                    <div class="detail-info-grid">
+                        <div class="di-row"><span>Name</span><strong id="dEmName"></strong></div>
+                        <div class="di-row"><span>Relation</span><strong id="dEmRelation"></strong></div>
+                        <div class="di-row"><span>Phone</span><strong id="dEmPhone"></strong></div>
+                    </div>
+                    <a class="em-call-btn" id="dCallBtn" href="#"><i class="fas fa-phone-alt"></i> Call Now</a>
+                </div>
+            </div>
+
+            <!-- Readings Timeline -->
+            <div class="detail-section">
+                <h4 class="section-title"><i class="fas fa-chart-line"></i> Readings History</h4>
+                <div class="readings-timeline" id="readingsTimeline"></div>
+            </div>
+
+            <!-- Notes -->
+            <div class="detail-section">
+                <h4 class="section-title"><i class="fas fa-sticky-note"></i> Clinical Notes</h4>
+                <textarea class="notes-area" id="modalNotes" rows="3" placeholder="Add clinical notes here…"></textarea>
+            </div>
+
+            <div class="modal-footer">
+                <button class="mf-btn cancel" id="closeDetailBtn2">Close</button>
+                <button class="mf-btn resolve-btn" id="modalResolveBtn"><i class="fas fa-check"></i> Mark
+                    Resolved</button>
+                <button class="mf-btn primary" id="saveNoteBtn"><i class="fas fa-save"></i> Save Notes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ NOTE MODAL ══════════════ -->
+    <div class="modal-bg" id="noteModal">
+        <div class="modal-box note-box">
+            <div class="modal-hdr">
+                <div>
+                    <h3>Add Note</h3>
+                    <p id="notePatientLabel">Patient</p>
+                </div>
+                <button class="modal-x" id="closeNoteBtn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="fg">
+                <label>Note</label>
+                <textarea class="notes-area" id="noteText" rows="4" placeholder="Write your clinical note…"></textarea>
+            </div>
+            <div class="modal-footer" style="margin-top:16px">
+                <button class="mf-btn cancel" id="cancelNoteBtn">Cancel</button>
+                <button class="mf-btn primary" id="saveNoteModalBtn"><i class="fas fa-save"></i> Save Note</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGOUT MODAL -->
+    <div class="modal-bg" id="logoutModal">
+        <div class="modal-box confirm-box">
+            <div class="confirm-ico logout-ico"><i class="fas fa-sign-out-alt"></i></div>
+            <h3>Log Out</h3>
+            <p>Are you sure you want to log out?</p>
+            <div class="confirm-footer">
+                <button class="mf-btn cancel" id="cancelLogoutBtn">Cancel</button>
+                <button class="mf-btn logout-btn" id="doLogoutBtn">Log Out</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"><i id="toastIcon"></i><span id="toastMsg"></span></div>
+
+    <script src="../js/Alert.js"></script>
+</body>
+
+</html>

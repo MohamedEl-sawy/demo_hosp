@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Heart - create an account</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+
+<section class="login-section">
+    <div class="login-container">
+        <div class="brand-side">
+            <div class="logo-box">
+                <div class="logo-img-div">
+                    <img src="../image/logo.png" alt="" class="logo-img-div" >
+                </div>
+                <span>SafeHeart</span>
+            </div>
+        </div>
+
+        <div class="form-side">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Please enter your details to sign in</p>
+            <form>
+                <div class="input-group">
+                    <label>User Name</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email"  placeholder="user name">
+                        <i class="far fa-envelope"></i>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password"  placeholder="*************">
+                        <i class="far fa-eye" id="togglePassword"></i>
+                    </div>
+                </div>
+                <p id="errorMsg" class="error-msg"></p>
+
+                <button type="button" id="loginBtn" class="btn-login">Sign   In</button>
+                <div class="form-footer">
+                    <p>Don't have an account? <a href="singup.html">Sign Up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<div id="toast" class="toast"></div>
+            
+<script type="module" src="../js/login.js"></script>
+
+
+<script type="module" src="../js/main.js"></script>
+<script>
+    
+</script>
+</html>

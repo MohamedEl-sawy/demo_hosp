@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Heart | Medical Report</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="../css/Report.css">
+</head>
+
+<body>
+
+    <!-- PAGE LOADER -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-wrap">
+            <div class="loader-heart"><i class="fas fa-heartbeat"></i></div>
+            <p>Loading Medical Report…</p>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <i id="toastIcon" class="fas fa-check-circle"></i>
+        <span id="toastMsg">Done</span>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sb-logo">
+            <div class="sb-logo-icon"><i class="fas fa-heartbeat"></i></div>
+            <div class="sb-logo-text">
+                <h3>Safe Heart</h3>
+                <p>Heart Care Hospital</p>
+            </div>
+        </div>
+        <nav class="sb-nav">
+            <a href="./Hospital_Dashboard.html" class="sb-link"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+            <a href="./patient.html" class="sb-link"><i class="fas fa-user-injured"></i><span>Patients</span></a>
+            <a href="./Alert.html" class="sb-link"><i class="fas fa-bell"></i><span>Alerts</span><em class="nav-dot">3</em></a>
+            <a href="./Report.html" class="sb-link active"><i class="fas fa-file-medical-alt"></i><span>Reports</span></a>
+            <div class="sb-divider"></div>
+            <a href="./Setting.html" class="sb-link"><i class="fas fa-cog"></i><span>Settings</span></a>
+            <a href="./help.html" class="sb-link"><i class="fas fa-question-circle"></i><span>Help</span></a>
+        </nav>
+        <div class="sb-bottom">
+            <div class="sb-user">
+                <div class="sb-avatar">AD</div>
+                <div class="sb-user-info">
+                    <p>Admin</p><small>Hospital Manager</small>
+                </div>
+            </div>
+            <div class="sb-btns">
+                <button class="sb-btn lock" id="lockBtn"><i class="fas fa-lock"></i> Lock</button>
+                <button class="sb-btn logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+        <div class="lock-screen" id="lockScreen">
+            <div class="lock-icon"><i class="fas fa-lock"></i></div>
+            <h3>Screen Locked</h3>
+            <p>Enter PIN to unlock</p>
+            <input class="lock-input" type="password" id="lockPin" placeholder="••••" maxlength="4">
+            <button class="lock-unlock-btn" id="unlockBtn">Unlock</button>
+        </div>
+    </aside>
+    <!-- <div class="overlay" id="overlay"></div> -->
+
+    <!-- CLINICAL NOTES MODAL -->
+    <div class="modal-overlay" id="notesModal">
+        <div class="modal">
+            <h2>📝 Add Clinical Notes</h2>
+            <p>Optional — notes will appear in the report and PDF only when saved.</p>
+            <div class="form-group">
+                <label>Doctor Name</label>
+                <input type="text" id="noteDoctorName" placeholder="Dr. Khalid Omar">
+            </div>
+            <div class="form-group">
+                <label>Hospital / Department</label>
+                <input type="text" id="noteHospital" placeholder="Cardiology Dept — Safe Heart Hospital">
+            </div>
+            <div class="form-group">
+                <label>Clinical Notes</label>
+                <textarea id="noteText" placeholder="Enter diagnosis, recommendations, follow-up plan..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeNotesModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveNotes()">💾 Save Notes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGOUT MODAL -->
+    <div class="modal-overlay" id="logoutModal">
+        <div class="modal" style="max-width:380px;text-align:center">
+            <div style="font-size:2.5rem;margin-bottom:12px">🚪</div>
+            <h2>Confirm Logout</h2>
+            <p>Are you sure you want to log out of Safe Heart?</p>
+            <div class="modal-footer" style="justify-content:center">
+                <button class="btn btn-outline" id="cancelLogoutBtn">Cancel</button>
+                <button class="btn btn-primary" id="doLogoutBtn">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE WRAP -->
+    <div class="page-wrap" id="pageWrap">
+
+        <!-- CONTROLS BAR -->
+        <div class="controls-bar no-print">
+            <div class="cb-left">
+                <button class="cb-menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+                <div class="cb-logo"><i class="fas fa-heartbeat"></i> Safe Heart</div>
+            </div>
+            <div class="cb-right">
+                <button class="ctrl-btn" id="notesBtn" onclick="openNotesModal()"><i class="fas fa-notes-medical"></i> Clinical Notes</button>
+                <button class="ctrl-btn print-btn" id="printBtn"><i class="fas fa-print"></i> Print</button>
+                <button class="ctrl-btn pdf-btn" id="pdfBtn"><i class="fas fa-file-pdf"></i> Export PDF</button>
+            </div>
+        </div>
+
+        <!-- REPORT BODY -->
+        <div class="report-body" id="reportBody">
+
+            <!-- REPORT HEADER -->
+            <header class="report-header">
+                <div class="rh-left">
+                    <div class="rh-logo">
+                        <div class="rh-logo-icon"><i class="fas fa-heartbeat"></i></div>
+                        <div>
+                            <h1>Safe Heart</h1>
+                            <p>Heart Care Hospital</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="rh-center">
+                    <h2 class="report-title">Medical Report</h2>
+                    <p class="report-subtitle">Comprehensive Patient Health Analysis</p>
+                    <span class="report-id" id="reportId">—</span>
+                </div>
+                <div class="rh-right">
+                    <div class="rh-date" id="reportDateTime"></div>
+                    <div class="rh-hospital">
+                        <p>Department of Cardiology</p>
+                        <small>Accredited · ISO 9001</small>
+                    </div>
+                </div>
+            </header>
+            <!-- PATIENT SEARCH ZONE -->
+            <div class="patient-search-zone no-print" id="patientSearchZone">
+                <div class="psz-inner">
+                    <div class="psz-title">
+                        <i class="fas fa-search"></i>
+                        <span>Search Patient Report</span>
+                    </div>
+                    <div class="psz-row">
+                        <div class="psz-input-wrap">
+                            <i class="fas fa-id-card psz-ico"></i>
+                            <input type="text" id="patientSearchInput"
+                                placeholder="Enter patient name or ID (e.g. SH-00412 or Ahmed)…" autocomplete="off">
+                            <button class="psz-clear" id="pszClear" style="display:none"><i
+                                    class="fas fa-times"></i></button>
+                        </div>
+                        <button class="psz-btn" id="pszSearchBtn"><i class="fas fa-search"></i> Search</button>
+                    </div>
+                    <div class="psz-dropdown" id="pszDropdown"></div>
+                </div>
+            </div>
+
+
+            <!-- ═══ EMPTY STATE ═══ -->
+            <div class="psz-empty" id="pszEmpty"></div>
+            
+
+            <!-- ═══ REPORT CONTENT (hidden until patient selected) ═══ -->
+            <div id="reportContent" style="display:none">
+
+                <!-- PATIENT INFORMATION -->
+                <section class="section slide-up">
+                    <div class="section-title">
+                        <i class="fas fa-user-circle"></i>
+                        <h3>Patient Information</h3>
+                    </div>
+                    <div class="patient-grid">
+                        <div class="pi-card">
+                            <div class="pi-avatar" id="piAvatar">—</div>
+                            <div class="pi-name-block">
+                                <h3 id="piName">—</h3>
+                                <p>Patient ID: <span class="mono" id="piPatientId">—</span></p>
+                                <span class="status-badge" id="piBadge"><span class="pulse-dot"></span>Under
+                                    Monitoring</span>
+                            </div>
+                        </div>
+                        <div class="pi-details">
+                            <div class="pi-row"><i class="fas fa-birthday-cake"></i><span>Age</span><strong
+                                    id="piAge">—</strong></div>
+                            <div class="pi-row"><i class="fas fa-venus-mars"></i><span>Gender</span><strong
+                                    id="piGender">—</strong></div>
+                            <div class="pi-row"><i class="fas fa-tint"></i><span>Blood Type</span><strong id="piBlood"
+                                    class="blood-type">—</strong></div>
+                            <div class="pi-row"><i class="fas fa-calendar-plus"></i><span>Admission</span><strong
+                                    id="piAdmission">—</strong></div>
+                            <div class="pi-row"><i class="fas fa-user-md"></i><span>Doctor</span><strong
+                                    id="piDoctor">—</strong></div>
+                            <div class="pi-row"><i class="fas fa-building"></i><span>Department</span><strong
+                                    id="piDept">—</strong></div>
+                            <div class="pi-row"><i class="fas fa-stethoscope"></i><span>Diagnosis</span><strong
+                                    id="piDiagnosis">—</strong></div>
+                            <div class="pi-row"><i class="fas fa-calendar-check"></i><span>Report Date</span><strong
+                                    id="piDate">—</strong></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AI ANALYSIS -->
+                <section class="section slide-up">
+                    <div class="section-title">
+                        <i class="fas fa-brain"></i>
+                        <h3>AI-Powered Analysis</h3>
+                        <span class="ai-tag"><i class="fas fa-microchip"></i> Safe Heart AI v2.1</span>
+                    </div>
+                    <div class="ai-grid">
+                        <div class="ai-status-card" id="aiStatusCard">
+                            <div class="ai-status-icon" id="aiStatusIcon"><i class="fas fa-circle-notch fa-spin"></i>
+                            </div>
+                            <div class="ai-status-body">
+                                <span class="ai-status-label">Overall Status</span>
+                                <h2 class="ai-status-val" id="aiStatusVal">—</h2>
+                                <p class="ai-status-desc" id="aiStatusDesc">—</p>
+                            </div>
+                            <div class="ai-confidence">
+                                <span>Confidence</span>
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" id="confidenceFill"></div>
+                                </div>
+                                <strong id="confidenceVal">—</strong>
+                            </div>
+                        </div>
+                        <div class="ai-findings" id="aiFindings"></div>
+                    </div>
+                </section>
+
+                <!-- VITAL SIGNS -->
+                <section class="section slide-up">
+                    <div class="section-title">
+                        <i class="fas fa-heartbeat"></i>
+                        <h3>Vital Signs — Visual Monitoring</h3>
+                        <span class="time-range-tag">Last 8 hours</span>
+                    </div>
+                    <div class="vitals-summary-row" id="vitalsSummary"></div>
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <div class="chart-label-wrap">
+                                    <div class="chart-dot red-dot"></div>
+                                    <div>
+                                        <h4>Heart Rate</h4><small>BPM over time</small>
+                                    </div>
+                                </div>
+                                <div class="chart-badge" id="hrBadge"></div>
+                            </div>
+                            <div class="chart-wrap"><canvas id="hrChart"></canvas></div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <div class="chart-label-wrap">
+                                    <div class="chart-dot blue-dot"></div>
+                                    <div>
+                                        <h4>Blood Pressure</h4><small>Systolic & Diastolic (mmHg)</small>
+                                    </div>
+                                </div>
+                                <div class="chart-badge" id="bpBadge"></div>
+                            </div>
+                            <div class="chart-wrap"><canvas id="bpChart"></canvas></div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <div class="chart-label-wrap">
+                                    <div class="chart-dot orange-dot"></div>
+                                    <div>
+                                        <h4>Body Temperature</h4><small>°C readings</small>
+                                    </div>
+                                </div>
+                                <div class="chart-badge" id="tempBadge"></div>
+                            </div>
+                            <div class="chart-wrap"><canvas id="tempChart"></canvas></div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <div class="chart-label-wrap">
+                                    <div class="chart-dot teal-dot"></div>
+                                    <div>
+                                        <h4>SpO₂ Saturation</h4><small>Oxygen level (%)</small>
+                                    </div>
+                                </div>
+                                <div class="chart-badge" id="spo2Badge"></div>
+                            </div>
+                            <div class="chart-wrap"><canvas id="spo2Chart"></canvas></div>
+                        </div>
+                    </div>
+                    <!-- ECG -->
+                    <div class="ecg-card">
+                        <div class="ecg-header">
+                            <div class="chart-label-wrap">
+                                <div class="ecg-blink"><i class="fas fa-wave-square"></i></div>
+                                <div>
+                                    <h4>ECG — Electrocardiogram</h4><small>Live cardiac electrical activity
+                                        simulation</small>
+                                </div>
+                            </div>
+                            <div class="ecg-status"><span class="pulse-dot"></span>Continuous Monitoring</div>
+                        </div>
+                        <div class="ecg-wrap"><canvas id="ecgCanvas"></canvas></div>
+                        <div class="ecg-footer">
+                            <span><strong>HR:</strong> <span id="ecgHR">—</span></span>
+                            <span><strong>QRS:</strong> 0.12s</span>
+                            <span><strong>QT:</strong> 0.40s</span>
+                            <span><strong>PR:</strong> 0.18s</span>
+                            <span><strong>Rhythm:</strong> <em class="rhythm-warn" id="ecgRhythm">—</em></span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PREDICTIVE ALERTS -->
+                <section class="section slide-up">
+                    <div class="section-title">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Predictive Risk Alerts</h3>
+                        <span class="ai-tag"><i class="fas fa-robot"></i> Trend Analysis</span>
+                    </div>
+                    <div class="predictive-grid" id="predictiveGrid"></div>
+                </section>
+
+                <!-- CLINICAL NOTES (dynamic, optional) -->
+                <div id="clinicalNotesSection"></div>
+
+                <!-- MEDICAL SUMMARY -->
+                <section class="section slide-up">
+                    <div class="section-title">
+                        <i class="fas fa-file-medical"></i>
+                        <h3>Medical Summary &amp; Recommendations</h3>
+                    </div>
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <div class="summary-card-hdr"><i class="fas fa-stethoscope"></i> Clinical Assessment</div>
+                            <p class="doctor-notes" id="doctorNotes">—</p>
+                        </div>
+                        <div class="summary-right">
+                            <div class="risk-level-card">
+                                <span class="risk-label">Risk Level</span>
+                                <div class="risk-gauge" id="riskGauge"></div>
+                                <span class="risk-val" id="riskVal">—</span>
+                            </div>
+                            <div class="recommendations" id="recommendations"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PATIENT TIMELINE -->
+                <section class="section slide-up">
+                    <div class="section-title">
+                        <i class="fas fa-history"></i>
+                        <h3>Patient Event Timeline</h3>
+                    </div>
+                    <div class="timeline" id="timeline"></div>
+                </section>
+
+                <!-- REPORT FOOTER -->
+                <footer class="report-footer">
+                    <div class="rf-left">
+                        <p><strong>Safe Heart Hospital</strong> · Department of Cardiology</p>
+                        <p>This report is computer-generated and clinically reviewed by the attending physician.</p>
+                        <p>Confidential medical record — Unauthorized disclosure prohibited.</p>
+                    </div>
+                    <div class="rf-right">
+                        <div class="rf-sign">
+                            <div class="rf-sign-line"></div>
+                            <p id="footerDoctor">—</p>
+                            <small>Consultant Cardiologist</small>
+                        </div>
+                    </div>
+                </footer>
+
+            </div><!-- end reportContent -->
+        </div><!-- end report-body -->
+    </div><!-- end page-wrap -->
+
+    <script>
+
+        // input.addEventListener("focus", () => {
+        //         dropdown.classList.add("active");
+        //     });
+
+        // const input = document.getElementById("patientSearchInput");
+        //     const dropdown = document.getElementById("pszDropdown");
+
+        //     function closeDropdown() {
+        //         dropdown.style.opacity = "0";
+        //         dropdown.style.transform = "translateY(-10px)";
+        //         dropdown.style.pointerEvents = "none";
+        //     }
+
+        //     // عند اختيار عنصر
+        //     document.addEventListener("click", (e) => {
+        //         if (e.target.closest(".psz-item")) {
+        //             input.value = e.target.querySelector(".psz-name")?.innerText || "";
+        //             closeDropdown();
+        //         }
+        //     });
+
+        //     // click outside
+        //     document.addEventListener("click", (e) => {
+        //         const zone = document.getElementById("patientSearchZone");
+
+        //         if (!zone.contains(e.target)) {
+        //             closeDropdown();
+        //         }
+        //     });
+
+            
+            
+    </script>
+    <script src="../js/Report.js"></script>
+    <script>
+        
+    </script>
+</body>
+
+</html>

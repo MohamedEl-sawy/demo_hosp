@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Heart | Patient Management</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/patients.css">
+</head>
+
+<body>
+
+    <!-- PAGE LOADER -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-heart"><i class="fas fa-heartbeat"></i></div>
+    </div>
+    
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sb-logo">
+            <div class="sb-logo-icon">
+                <!-- <i class="fas fa-heartbeat"></i> -->
+                <img src="../image/logo.png" alt="">
+            </div>
+            <div class="sb-logo-text">
+                <h3>Safe Heart</h3>
+                <p>Heart Care Hospital</p>
+            </div>
+        </div>
+        <!-- <div class="sb-divider"></div> -->
+        <nav class="sb-nav">
+            <a href="./Hospital_Dashboard.html" class="sb-link"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+            <a href="./patient.html" class="sb-link"><i class="fas fa-user-injured"></i><span>Patients</span></a>
+            <a href="./Alert.html" class="sb-link"><i class="fas fa-bell"></i><span>Alerts</span><em class="nav-dot">3</em></a>
+            <a href="./Report.html" class="sb-link"><i class="fas fa-file-medical-alt"></i><span>Reports</span></a>
+            <div class="sb-divider"></div>
+            <a href="./Setting.html" class="sb-link"><i class="fas fa-cog"></i><span>Settings</span></a>
+            <a href="./help.html" class="sb-link"><i class="fas fa-question-circle"></i><span>Help</span></a>
+        </nav>
+        <div class="sb-bottom">
+            <div class="sb-user">
+                <div class="sb-avatar">AD</div>
+                <div class="sb-user-info">
+                    <p>Admin</p><small>Hospital Manager</small>
+                </div>
+            </div>
+            <div class="sb-btns">
+                <button class="sb-btn lock" id="lockBtn"><i class="fas fa-lock"></i> Lock</button>
+                <button class="sb-btn logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+        <div class="lock-screen" id="lockScreen">
+            <div class="lock-icon"><i class="fas fa-lock"></i></div>
+            <h3>Screen Locked</h3>
+            <p>Enter PIN to unlock</p>
+            <input class="lock-input" type="password" id="lockPin" placeholder="Enter PIN" maxlength="4">
+            <button class="lock-unlock-btn" id="unlockBtn">Unlock</button>
+        </div>
+    </aside>
+    
+    <div class="overlay" id="overlay"></div>
+
+    <!-- MAIN -->
+    <main class="content">
+
+        <header class="header">
+            <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+            <div class="header-right">
+                <div class="icon-btn notif"><i class="fas fa-bell"></i><span class="badge-dot"></span></div>
+                <div class="icon-btn"><i class="fas fa-envelope"></i></div>
+                <div class="hdr-user">
+                    <div class="hdr-avatar">AD</div>
+                    <div>
+                        <p>Admin</p><small>Hospital Manager</small>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-hero">
+            <div>
+                <h1 class="hero-title">Patient Management</h1>
+                <p class="hero-sub">Monitor, search and manage all registered patients</p>
+            </div>
+            <div class="live-badge"><span class="live-pulse"></span>Live</div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-grid">
+            <div class="stat-card blue">
+                <div class="stat-icon-wrap"><i class="fas fa-users"></i></div>
+                <div class="stat-info"><span class="stat-num" id="statTotal">0</span><span class="stat-lbl">Total
+                        Patients</span></div>
+                <span class="stat-trend up"><i class="fas fa-arrow-up"></i> 8.2%</span>
+            </div>
+            <div class="stat-card teal">
+                <div class="stat-icon-wrap"><i class="fas fa-hospital"></i></div>
+                <div class="stat-info"><span class="stat-num" id="statActive">0</span><span class="stat-lbl">Active
+                        Patients</span></div>
+                <span class="stat-trend up"><i class="fas fa-arrow-up"></i> 3 today</span>
+            </div>
+            <div class="stat-card red">
+                <div class="stat-icon-wrap"><i class="fas fa-exclamation-circle"></i></div>
+                <div class="stat-info"><span class="stat-num" id="statCritical">0</span><span class="stat-lbl">Critical
+                        Cases</span></div>
+                <span class="stat-trend down"><i class="fas fa-arrow-down"></i> 2 less</span>
+            </div>
+            <div class="stat-card green">
+                <div class="stat-icon-wrap"><i class="fas fa-sign-out-alt"></i></div>
+                <div class="stat-info"><span class="stat-num" id="statDischarged">0</span><span
+                        class="stat-lbl">Discharged Today</span></div>
+                <span class="stat-trend neutral"><i class="fas fa-minus"></i> Normal</span>
+            </div>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="search-zone">
+            <div class="search-wrap">
+                <i class="fas fa-search s-ico"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search by patient name or ID…"
+                    autocomplete="off">
+                <button class="s-clear" id="searchClear"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="filter-pills">
+                <button class="fpill active" data-filter="all">All</button>
+                <button class="fpill" data-filter="Stable">Stable</button>
+                <button class="fpill" data-filter="Warning">Warning</button>
+                <button class="fpill" data-filter="Critical">Critical</button>
+            </div>
+        </div>
+
+        <!-- RESULT CARD -->
+        <div class="result-wrap" id="resultWrap">
+            <div class="result-card" id="resultCard">
+                <div class="rc-top">
+                    <div class="rc-avatar" id="rcAvatar"></div>
+                    <div class="rc-identity">
+                        <h2 id="rcName"></h2>
+                        <p id="rcId"></p>
+                        <span class="rc-badge" id="rcStatus"></span>
+                    </div>
+                    <button class="rc-close" id="rcClose"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="rc-vitals">
+                    <div class="vital-chip">
+                        <div class="vc-icon vc-red"><i class="fas fa-heartbeat"></i></div>
+                        <div class="vc-body"><strong id="vcHR"></strong><small>Heart Rate</small></div>
+                    </div>
+                    <div class="vital-chip">
+                        <div class="vc-icon vc-blue"><i class="fas fa-tint"></i></div>
+                        <div class="vc-body"><strong id="vcBlood"></strong><small>Blood Type</small></div>
+                    </div>
+                    <div class="vital-chip">
+                        <div class="vc-icon vc-teal"><i class="fas fa-user"></i></div>
+                        <div class="vc-body"><strong id="vcAge"></strong><small>Age</small></div>
+                    </div>
+                    <div class="vital-chip">
+                        <div class="vc-icon vc-green"><i class="fas fa-clock"></i></div>
+                        <div class="vc-body"><strong id="vcUpdate"></strong><small>Last Update</small></div>
+                    </div>
+                </div>
+                <div class="rc-emergency">
+                    <h4><i class="fas fa-phone-alt"></i> Emergency Contact</h4>
+                    <div class="em-grid">
+                        <div class="em-row"><span>Name</span><strong id="emName"></strong></div>
+                        <div class="em-row"><span>Relation</span><strong id="emRelation"></strong></div>
+                        <div class="em-row"><span>Phone</span><strong id="emPhone"></strong></div>
+                    </div>
+                </div>
+                <div class="rc-actions">
+                    <a class="ra-btn ra-call" id="btnCall" href="#"><i class="fas fa-phone-alt"></i> Call</a>
+                    <a class="ra-btn ra-wa" id="btnWA" href="#" target="_blank"><i class="fab fa-whatsapp"></i>
+                        WhatsApp</a>
+                    <button class="ra-btn ra-admit" id="btnAdmit"><i class="fas fa-hospital"></i> Admit</button>
+                    <button class="ra-btn ra-emergency" id="btnEmergency"><i class="fas fa-exclamation-triangle"></i>
+                        Emergency</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="table-panel">
+            <div class="tp-head">
+                <div>
+                    <h3>Active In-Patients</h3>
+                    <p>Currently admitted patients</p>
+                </div>
+                <div class="tp-head-right">
+                    <span class="tp-count" id="tableCount">0 patients</span>
+                    <button class="admit-new-btn" id="admitNewBtn"><i class="fas fa-user-plus"></i> Admit New</button>
+                </div>
+            </div>
+            <div class="table-scroll">
+                <table class="pt-table">
+                    <thead>
+                        <tr>
+                            <th>Patient</th>
+                            <th>Status</th>
+                            <th>Room</th>
+                            <th>Condition</th>
+                            <th>Admitted</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ptBody"></tbody>
+                </table>
+                <div class="table-empty" id="tableEmpty">
+                    <div class="empty-ico"><i class="fas fa-user-injured"></i></div>
+                    <p>No patients currently admitted</p>
+                    <small>Click "Admit New" to add a patient</small>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ADMIT MODAL -->
+    <div class="modal-bg" id="editModal">
+        <div class="modal-box">
+            <div class="modal-hdr">
+                <div>
+                    <h3>Edit Patient</h3>
+                    <p>Update patient information</p>
+                </div>
+                <button class="modal-x" id="closeEditBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+    
+            <div class="form-grid">
+                <div class="fg full">
+                    <label>Full Name</label>
+                    <input type="text" id="eName" disabled>
+                </div>
+    
+                <div class="fg">
+                    <label>Patient ID</label>
+                    <input type="text" id="eId" disabled>
+                </div>
+    
+                <div class="fg">
+                    <label>Room <em>*</em></label>
+                    <input type="text" id="eRoom" placeholder="e.g. 205">
+                </div>
+    
+                <div class="fg">
+                    <label>Department</label>
+                    <input type="text" id="eDept" placeholder="e.g. Cardiology">
+                </div>
+    
+                <div class="fg">
+                    <label>Status</label>
+                    <select id="eStatus">
+                        <option value="Stable">Stable</option>
+                        <option value="Warning">Warning</option>
+                        <option value="Critical">Critical</option>
+                    </select>
+                </div>
+    
+                <div class="fg">
+                    <label>Condition</label>
+                    <input type="text" id="eCondition" placeholder="e.g. Acute MI">
+                </div>
+            </div>
+    
+            <div class="modal-footer">
+                <button class="mf-btn cancel" id="cancelEditBtn">Cancel</button>
+                <button class="mf-btn primary" id="saveEditBtn">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- REPORT MODAL -->
+    <div class="modal-bg" id="reportModal">
+        <div class="modal-box report-box">
+            <div class="modal-hdr">
+                <div>
+                    <h3>Medical Report</h3>
+                    <p id="reportPtName">Patient</p>
+                </div>
+                <button class="modal-x" id="closeReportBtn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="form-grid">
+                <div class="fg full"><label>Diagnosis</label><input type="text" id="rDiagnosis"
+                        placeholder="Primary diagnosis"></div>
+                <div class="fg"><label>Attending Doctor</label><input type="text" id="rDoctor" placeholder="Dr. Name">
+                </div>
+                <div class="fg"><label>Date</label><input type="text" id="rDate" readonly></div>
+                <div class="fg full"><label>Medications</label><input type="text" id="rMeds"
+                        placeholder="e.g. Aspirin 100mg, Metoprolol 50mg"></div>
+                <div class="fg full"><label>Clinical Notes</label><textarea id="rNotes" rows="4"
+                        placeholder="Write clinical observations…"></textarea></div>
+            </div>
+            <div class="modal-footer">
+                <button class="mf-btn cancel" id="closeReportBtn2">Close</button>
+                <button class="mf-btn primary" id="saveReportBtn"><i class="fas fa-save"></i> Save Report</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DISCHARGE MODAL -->
+    <div class="modal-bg" id="dischargeModal">
+        <div class="modal-box confirm-box">
+            <div class="confirm-ico discharge-ico"><i class="fas fa-sign-out-alt"></i></div>
+            <h3>Discharge Patient</h3>
+            <p>Are you sure you want to discharge <strong id="dischargeName"></strong>?</p>
+            <div class="confirm-footer">
+                <button class="mf-btn cancel" id="cancelDischargeBtn">Cancel</button>
+                <button class="mf-btn discharge-btn" id="doDischargeBtn">Discharge</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EMERGENCY MODAL -->
+    <div class="modal-bg" id="emergencyModal">
+        <div class="modal-box confirm-box emergency-box">
+            <div class="confirm-ico emergency-ico"><i class="fas fa-exclamation-triangle"></i></div>
+            <h3>Emergency Alert</h3>
+            <p>Send emergency alert for <strong id="emergencyName"></strong>?<br>All on-call staff will be notified.</p>
+            <div class="confirm-footer">
+                <button class="mf-btn cancel" id="cancelEmergencyBtn">Cancel</button>
+                <button class="mf-btn emergency-btn" id="doEmergencyBtn"><i class="fas fa-bell"></i> Send Alert</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGOUT MODAL -->
+    <div class="modal-bg" id="logoutModal">
+        <div class="modal-box confirm-box">
+            <div class="confirm-ico logout-ico"><i class="fas fa-sign-out-alt"></i></div>
+            <h3>Log Out</h3>
+            <p>Are you sure you want to log out of Safe Heart?</p>
+            <div class="confirm-footer">
+                <button class="mf-btn cancel" id="cancelLogoutBtn">Cancel</button>
+                <button class="mf-btn logout-btn" id="doLogoutBtn">Log Out</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"><i id="toastIcon"></i><span id="toastMsg"></span></div>
+
+    <script src="../js/patients.js"></script>
+</body>
+
+</html>
